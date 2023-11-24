@@ -1,6 +1,8 @@
+import { StyledArrowContainer } from "@/components/ui/arrow-up/arrow-up.styles";
 import { styled } from "@stitches/react";
 
 export const StyledIdeaContainer = styled("div", {
+  position: "relative",
   display: "grid",
   gap: "2px",
   padding: 10,
@@ -10,6 +12,9 @@ export const StyledIdeaContainer = styled("div", {
 
   "&:hover": {
     backgroundColor: "rgb(189 189 189 / 5%)",
+    [`${StyledArrowContainer}`]: {
+      opacity: 1,
+    },
   },
 });
 
