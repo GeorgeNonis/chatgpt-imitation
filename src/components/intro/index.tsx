@@ -4,7 +4,13 @@ import { StyledIntro, StyledTitle } from "./intro.styles";
 const Intro = () => {
   return (
     <StyledIntro>
-      <Image width={75} height={75} src={"/chatgpt.logo.webp"} alt="chat gpt" />
+      <Image
+        width={75}
+        height={75}
+        src={"/me.jpg"}
+        alt="chat gpt"
+        style={{ borderRadius: "50%" }}
+      />
       <StyledTitle>How can I help you today?</StyledTitle>
     </StyledIntro>
   );
