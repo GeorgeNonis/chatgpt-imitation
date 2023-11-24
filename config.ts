@@ -1,6 +1,6 @@
-import { Types } from "./types";
+import { IdeaProposal } from "./types";
 
-export const IDEAS: Types[] = [
+export const IDEAS: IdeaProposal[] = [
   { title: "Give me ideas", idea: `for what to do with my kids' art` },
   {
     title: "Brainstorm incentives",

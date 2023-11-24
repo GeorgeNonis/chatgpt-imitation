@@ -1,11 +1,12 @@
-import { StyledTextArea } from "./text-area.styles";
+import { StyledTextArea, StyledWarning } from "./text-area.styles";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowUp } from "@fortawesome/free-solid-svg-icons";
-import { StyledWarning } from "../intro/intro.styles";
+import { Proposals } from "..";
 
 const TextArea = () => {
   return (
     <div>
+      <Proposals />
       <StyledTextArea>
         <input type="text" maxLength={150} />
         <button>

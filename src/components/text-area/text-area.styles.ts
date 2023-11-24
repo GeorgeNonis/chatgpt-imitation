@@ -6,3 +6,10 @@ export const StyledTextArea = styled("div", {
   width: 800,
   marginInline: "auto",
 });
+export const StyledWarning = styled("h3", {
+  paddingTop: "10px",
+  color: "#b7b7b7",
+  textAlign: "center",
+  fontSize: ".75rem",
+  fontWeight: "400",
+});
