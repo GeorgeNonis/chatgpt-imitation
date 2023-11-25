@@ -7,7 +7,7 @@ const Intro = () => {
       <Image
         width={75}
         height={75}
-        src={"/me.jpg"}
+        src={"/cat.png"}
         alt="chat gpt"
         style={{ borderRadius: "50%" }}
       />
