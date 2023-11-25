@@ -24,7 +24,8 @@ export interface AppContextI {
 export const AppContext = createContext<AppContextI | null>(null);
 import toast from "react-hot-toast";
 export const AppContextProvier = ({ children }: { children: ReactNode }) => {
-  const [response, setResponse] = useState("");
+  // const [response, setResponse] = useState("hey");
+  const [response, setResponse] = useState(LOREM_IPSUM);
   const [typing, setTyping] = useState(false);
   const typewriterRef = useRef<any>(null);
 

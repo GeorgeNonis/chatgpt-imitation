@@ -1,18 +1,10 @@
-import Image from "next/image";
-import { StyledText, StyledUser } from "./user.styles";
+import { StyledImage, StyledUser } from "./user.styles";
 import { UserI } from "./user.types";
 
-const User = ({
-  src,
-  height = 20,
-  width = 20,
-  alt = "user image",
-  user,
-}: UserI) => {
+const User = ({ src, height = 30, width = 30, alt = "user image" }: UserI) => {
   return (
     <StyledUser>
-      <Image width={width} height={height} src={src} alt={alt} />
-      <StyledText>{user}</StyledText>
+      <StyledImage width={width} height={height} src={src} alt={alt} />
     </StyledUser>
   );
 };

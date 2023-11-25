@@ -1,8 +1,15 @@
 "use client";
 
 import Typewriter from "typewriter-effect";
-import { StyledChat, StyledChatWrapper } from "./chat.styles";
+import {
+  StyledChat,
+  StyledChatWrapper,
+  StyledText,
+  StyledTextWrapper,
+  StyledTypeWriterWrapper,
+} from "./chat.styles";
 import { useAppContext } from "../../../context/app";
+import { User } from "..";
 
 const Chat = () => {
   const { response, typewriterRef, setTyping } = useAppContext();
@@ -10,25 +17,31 @@ const Chat = () => {
   return (
     <StyledChatWrapper>
       <StyledChat>
-        <Typewriter
-          onInit={(typewriter) => {
-            typewriterRef.current = typewriter;
-            setTyping(true);
-            typewriter
-              .typeString(response)
-              .callFunction(() => {
-                setTyping(false);
-              })
-              .start();
-          }}
-          options={{
-            autoStart: true,
-            loop: false,
-            deleteSpeed: 0,
-            cursor: "",
-            delay: 0.5,
-          }}
-        />
+        <User user="You" src="/me.jpg" />
+        <StyledTextWrapper>
+          <StyledText>You</StyledText>
+          <StyledTypeWriterWrapper>
+            <Typewriter
+              onInit={(typewriter) => {
+                typewriterRef.current = typewriter;
+                setTyping(true);
+                typewriter
+                  .typeString(response)
+                  .callFunction(() => {
+                    setTyping(false);
+                  })
+                  .start();
+              }}
+              options={{
+                autoStart: true,
+                loop: false,
+                deleteSpeed: 0,
+                cursor: "",
+                delay: 0.01,
+              }}
+            />
+          </StyledTypeWriterWrapper>
+        </StyledTextWrapper>
       </StyledChat>
     </StyledChatWrapper>
   );
