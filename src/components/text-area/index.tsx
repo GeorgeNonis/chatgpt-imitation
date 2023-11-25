@@ -1,13 +1,19 @@
 import { StyledInput, StyledTextArea, StyledWarning } from "./text-area.styles";
-import { ArrowUp, ToolTip } from "..";
+import { ArrowUp, PauseButton, ToolTip } from "..";
 import { useTextArea } from "./useTextArea";
 
 const TextArea = () => {
-  const { textAreaHandler, valid, submitHandler } = useTextArea();
+  const { textAreaHandler, submitHandler, stopTyping, valid, typing } =
+    useTextArea();
   return (
     <>
       <StyledTextArea>
         <StyledInput
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              submitHandler();
+            }
+          }}
           rows={1}
           tabIndex={0}
           maxLength={350}
@@ -19,12 +25,16 @@ const TextArea = () => {
           tooltip="Send Message"
           css={{ display: "grid", placeContent: "center" }}
         >
-          <ArrowUp
-            onClick={submitHandler}
-            theme="white"
-            css={{ height: 20, width: 20 }}
-            isValid={valid}
-          />
+          {!typing ? (
+            <ArrowUp
+              onClick={submitHandler}
+              theme="white"
+              css={{ height: 20, width: 20 }}
+              isValid={valid}
+            />
+          ) : (
+            <PauseButton onClick={stopTyping} />
+          )}
         </ToolTip>
       </StyledTextArea>
       <StyledWarning>

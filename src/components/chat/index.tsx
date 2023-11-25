@@ -1,30 +1,36 @@
 "use client";
 
 import Typewriter from "typewriter-effect";
-import { StyledChat, StyledWrapper } from "./chat.styles";
+import { StyledChat, StyledChatWrapper } from "./chat.styles";
 import { useAppContext } from "../../../context/app";
 
 const Chat = () => {
-  const { response } = useAppContext();
+  const { response, typewriterRef, setTyping } = useAppContext();
 
   return (
-    <StyledChat>
-      <StyledWrapper>
+    <StyledChatWrapper>
+      <StyledChat>
         <Typewriter
           onInit={(typewriter) => {
-            typewriter.typeString(response).start();
+            typewriterRef.current = typewriter;
+            setTyping(true);
+            typewriter
+              .typeString(response)
+              .callFunction(() => {
+                setTyping(false);
+              })
+              .start();
           }}
           options={{
-            // strings: [response],
             autoStart: true,
             loop: false,
             deleteSpeed: 0,
             cursor: "",
-            delay: 0.4,
+            delay: 0.5,
           }}
         />
-      </StyledWrapper>
-    </StyledChat>
+      </StyledChat>
+    </StyledChatWrapper>
   );
 };
 export default Chat;
