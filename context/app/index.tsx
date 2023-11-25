@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Dispatch,
   ReactNode,
@@ -6,6 +8,7 @@ import {
   useContext,
   useState,
 } from "react";
+import { LOREM_IPSUM } from "../../config";
 
 export interface AppContextI {
   response: string;
@@ -15,7 +18,7 @@ export interface AppContextI {
 export const AppContext = createContext<AppContextI | null>(null);
 
 export const AppContextProvier = ({ children }: { children: ReactNode }) => {
-  const [response, setResponse] = useState("");
+  const [response, setResponse] = useState(LOREM_IPSUM);
 
   return (
     <AppContext.Provider value={{ response, setResponse }}>

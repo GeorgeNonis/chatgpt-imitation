@@ -1,12 +1,11 @@
 import { StyledInput, StyledTextArea, StyledWarning } from "./text-area.styles";
-import { ArrowUp, Proposals, ToolTip } from "..";
+import { ArrowUp, ToolTip } from "..";
 import { useTextArea } from "./useTextArea";
 
 const TextArea = () => {
   const { textAreaHandler, valid, submitHandler } = useTextArea();
   return (
     <>
-      <Proposals />
       <StyledTextArea>
         <StyledInput
           rows={1}

@@ -1,7 +1,9 @@
 import { ChangeEvent, useEffect, useState } from "react";
 import axios from "axios";
+import { useAppContext } from "../../../context/app";
 
 export const useTextArea = () => {
+  const { setResponse } = useAppContext();
   const [value, setValue] = useState("");
   const [valid, setValid] = useState(false);
 
@@ -34,6 +36,8 @@ export const useTextArea = () => {
       );
 
       console.log(response.data);
+      const message = response.data.choices[0]?.message.content;
+      setResponse(message);
     } catch (error) {
       console.error("Error with OpenAI API:", error);
     }
