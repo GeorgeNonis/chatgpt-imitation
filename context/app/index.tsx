@@ -33,7 +33,7 @@ export const AppContextProvier = ({ children }: { children: ReactNode }) => {
     if (typewriterRef.current) {
       typewriterRef.current.stop();
       setTyping(false);
-      toast.success("Stoped Writing");
+      toast.success("Stoped Typing");
     }
   };
 

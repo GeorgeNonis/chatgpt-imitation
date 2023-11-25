@@ -10,16 +10,17 @@ import {
 } from "./chat.styles";
 import { useAppContext } from "../../../context/app";
 import { User } from "..";
+import { ChatI } from "./chat.types";
 
-const Chat = () => {
+const Message = ({ user, ...props }: ChatI) => {
   const { response, typewriterRef, setTyping } = useAppContext();
 
   return (
     <StyledChatWrapper>
       <StyledChat>
-        <User user="You" src="/me.jpg" />
+        <User {...props} />
         <StyledTextWrapper>
-          <StyledText>You</StyledText>
+          <StyledText>{user}</StyledText>
           <StyledTypeWriterWrapper>
             <Typewriter
               onInit={(typewriter) => {
@@ -46,4 +47,4 @@ const Chat = () => {
     </StyledChatWrapper>
   );
 };
-export default Chat;
+export default Message;

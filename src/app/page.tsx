@@ -1,6 +1,6 @@
 "use client";
 
-import { Chat, Intro, Proposals, TextArea } from "@/components";
+import { Message, Intro, Proposals, TextArea } from "@/components";
 import {
   StyledChatGptchat,
   StyledMain,
@@ -14,7 +14,7 @@ const Home = () => {
     <StyledMain>
       <StyledSideBar>Sidebar</StyledSideBar>
       <StyledChatGptchat emptyChat={response.trim().length === 0}>
-        {response ? <Chat /> : <Intro />}
+        {response ? <Message src="/me.jpg" user="You" /> : <Intro />}
         {!response && <Proposals />}
         <TextArea />
       </StyledChatGptchat>
