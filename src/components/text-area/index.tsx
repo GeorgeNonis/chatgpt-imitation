@@ -9,7 +9,7 @@ const TextArea = () => {
     stopTyping,
     setValue,
     valid,
-    typing,
+    isLoading,
     value,
   } = useTextArea();
   return (
@@ -35,7 +35,7 @@ const TextArea = () => {
           tooltip="Send Message"
           css={{ display: "grid", placeContent: "center" }}
         >
-          {!typing ? (
+          {!isLoading ? (
             <ArrowUp
               onClick={submitHandler}
               theme="white"

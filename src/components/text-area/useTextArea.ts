@@ -5,7 +5,8 @@ import toast from "react-hot-toast";
 import { v4 as uuidv4 } from "uuid";
 
 export const useTextArea = () => {
-  const { stopTyping, setConversation, typing } = useAppContext();
+  const { stopTyping, setConversation, setLoading, typing, loading } =
+    useAppContext();
   const [value, setValue] = useState("");
   const [valid, setValid] = useState(false);
 
@@ -15,9 +16,12 @@ export const useTextArea = () => {
   };
 
   const submitHandler = async () => {
+    setLoading(true);
     setConversation((prevState) => {
       return [...prevState, { from: "You", message: value, id: uuidv4() }];
     });
+    setValue("");
+
     try {
       const response = await axios.post(
         "https://api.openai.com/v1/chat/completions",
@@ -46,7 +50,6 @@ export const useTextArea = () => {
           { from: "MeowGPT", message: message, id: uuidv4() },
         ];
       });
-      setValue("");
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
         const statusCode = error.response.status;
@@ -60,6 +63,7 @@ export const useTextArea = () => {
       }
       console.error("Error with OpenAI API:", error);
     }
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -67,13 +71,17 @@ export const useTextArea = () => {
     setValid(validText);
   }, [value]);
 
+  const isLoading = typing || loading;
+
+  console.log({ isLoading, typing, loading });
+
   return {
     textAreaHandler,
     submitHandler,
     stopTyping,
     setValue,
     valid,
-    typing,
+    isLoading,
     value,
   };
 };

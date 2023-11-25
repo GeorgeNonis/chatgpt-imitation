@@ -1,12 +1,6 @@
 "use client";
 
-import {
-  Message,
-  Intro,
-  Proposals,
-  TextArea,
-  Conversation,
-} from "@/components";
+import { Intro, Proposals, TextArea, Conversation } from "@/components";
 import {
   StyledChatGptchat,
   StyledMain,

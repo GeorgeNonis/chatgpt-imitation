@@ -7,6 +7,7 @@ import { AppContextI, ConversationI } from "./app.types";
 export const AppContext = createContext<AppContextI | null>(null);
 
 export const AppContextProvier = ({ children }: { children: ReactNode }) => {
+  const [loading, setLoading] = useState(false);
   const [conversation, setConversation] = useState<ConversationI[]>([]);
   const [typing, setTyping] = useState(false);
 
@@ -26,6 +27,8 @@ export const AppContextProvier = ({ children }: { children: ReactNode }) => {
         typewriterRef,
         typing,
         conversation,
+        loading,
+        setLoading,
         setConversation,
         stopTyping,
         setTyping,
