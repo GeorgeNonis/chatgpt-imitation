@@ -1,15 +1,8 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowUp } from "@fortawesome/free-solid-svg-icons";
-import { CSSProperties } from "react";
+import { ArrowUpI } from "./arrow-up.types";
 
-export interface ArrowUpProps {
-  theme?: "dark" | "white";
-  isValid?: boolean;
-  css?: CSSProperties;
-  onClick: () => void;
-}
-
-const ArrowUp = ({ theme = "dark", isValid, css, ...props }: ArrowUpProps) => {
+const ArrowUp = ({ theme = "dark", isValid, css, ...props }: ArrowUpI) => {
   if (theme === "white") {
     return (
       <FontAwesomeIcon

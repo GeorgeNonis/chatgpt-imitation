@@ -1,3 +1,4 @@
+export { default as User } from "./ui/user";
 export { default as Chat } from "./chat";
 export { default as Proposals } from "./proposals";
 export { default as TextArea } from "./text-area";

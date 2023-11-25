@@ -1,5 +1,5 @@
 import { ArrowUp, ToolTip } from "@/components/ui";
-import { IdeaProps } from "./idea.props";
+import { IdeaI } from "./idea.props";
 import {
   StyledContent,
   StyledIdea,
@@ -8,7 +8,7 @@ import {
 } from "./idea.styles";
 import { useState } from "react";
 
-const Idea = ({ title, idea }: IdeaProps) => {
+const Idea = ({ title, idea }: IdeaI) => {
   const [isHovered, setIsHovered] = useState(false);
   return (
     <StyledIdeaContainer
