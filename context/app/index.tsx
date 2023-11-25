@@ -1,5 +1,6 @@
 import {
   Dispatch,
+  ReactNode,
   SetStateAction,
   createContext,
   useContext,
@@ -13,13 +14,13 @@ export interface AppContextI {
 
 export const AppContext = createContext<AppContextI | null>(null);
 
-export const AppContextProvier = () => {
+export const AppContextProvier = ({ children }: { children: ReactNode }) => {
   const [response, setResponse] = useState("");
 
   return (
-    <AppContext.Provider
-      value={{ response, setResponse }}
-    ></AppContext.Provider>
+    <AppContext.Provider value={{ response, setResponse }}>
+      {children}
+    </AppContext.Provider>
   );
 };
 
