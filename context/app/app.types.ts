@@ -1,4 +1,4 @@
-import { User } from "@/components/chat/chat.types";
+import { User } from "@/components/message/chat.types";
 import { Dispatch, MutableRefObject, SetStateAction } from "react";
 
 export interface ConversationI {

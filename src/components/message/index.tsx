@@ -11,9 +11,12 @@ import {
 import { useAppContext } from "../../../context/app";
 import { User } from "..";
 import { ChatI } from "./chat.types";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCopy } from "@fortawesome/free-solid-svg-icons";
+import { useChat } from "./useChat";
 
 const Message = ({ user, message, ...props }: ChatI) => {
-  const { typewriterRef, setTyping } = useAppContext();
+  const { copyToClipboard, setTyping, typewriterRef } = useChat({ message });
 
   return (
     <StyledChatWrapper>
@@ -42,6 +45,15 @@ const Message = ({ user, message, ...props }: ChatI) => {
               }}
             />
           </StyledTypeWriterWrapper>
+          <FontAwesomeIcon
+            icon={faCopy}
+            style={{
+              color: "white",
+              marginTop: 10,
+              cursor: "pointer",
+            }}
+            onClick={copyToClipboard}
+          />
         </StyledTextWrapper>
       </StyledChat>
     </StyledChatWrapper>

@@ -73,8 +73,6 @@ export const useTextArea = () => {
 
   const isLoading = typing || loading;
 
-  console.log({ isLoading, typing, loading });
-
   return {
     textAreaHandler,
     submitHandler,
