@@ -23,7 +23,7 @@ export const StyledChatGptchat = styled("div", {
         gridTemplateRows: "8fr 2fr 2fr .5fr",
       },
       false: {
-        gridTemplateRows: "11fr 1fr .5fr",
+        gridTemplateRows: "11fr 2.5fr 0.5fr",
       },
     },
   },

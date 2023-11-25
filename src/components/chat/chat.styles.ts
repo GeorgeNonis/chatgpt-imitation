@@ -20,7 +20,6 @@ export const StyledText = styled("h3", {
 
 export const StyledTextWrapper = styled("div", {
   display: "grid",
-  gridTemplateRows: "1fr 11fr",
 });
 
 export const StyledTypeWriterWrapper = styled("div", {

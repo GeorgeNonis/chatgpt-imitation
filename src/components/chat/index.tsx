@@ -12,13 +12,13 @@ import { useAppContext } from "../../../context/app";
 import { User } from "..";
 import { ChatI } from "./chat.types";
 
-const Message = ({ user, ...props }: ChatI) => {
-  const { response, typewriterRef, setTyping } = useAppContext();
+const Message = ({ user, message, ...props }: ChatI) => {
+  const { typewriterRef, setTyping } = useAppContext();
 
   return (
     <StyledChatWrapper>
       <StyledChat>
-        <User {...props} />
+        <User user={user} {...props} />
         <StyledTextWrapper>
           <StyledText>{user}</StyledText>
           <StyledTypeWriterWrapper>
@@ -27,7 +27,7 @@ const Message = ({ user, ...props }: ChatI) => {
                 typewriterRef.current = typewriter;
                 setTyping(true);
                 typewriter
-                  .typeString(response)
+                  .typeString(message)
                   .callFunction(() => {
                     setTyping(false);
                   })

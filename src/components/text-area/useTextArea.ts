@@ -1,9 +1,11 @@
 import { ChangeEvent, useEffect, useState } from "react";
 import axios from "axios";
 import { useAppContext } from "../../../context/app";
+import toast from "react-hot-toast";
+import { v4 as uuidv4 } from "uuid";
 
 export const useTextArea = () => {
-  const { setResponse, stopTyping, typing } = useAppContext();
+  const { stopTyping, setConversation, typing } = useAppContext();
   const [value, setValue] = useState("");
   const [valid, setValid] = useState(false);
 
@@ -13,6 +15,9 @@ export const useTextArea = () => {
   };
 
   const submitHandler = async () => {
+    setConversation((prevState) => {
+      return [...prevState, { from: "You", message: value, id: uuidv4() }];
+    });
     try {
       const response = await axios.post(
         "https://api.openai.com/v1/chat/completions",
@@ -21,8 +26,7 @@ export const useTextArea = () => {
           messages: [
             {
               role: "user",
-              content:
-                "Can you tell me which day is the independent day of Cyprus?",
+              content: value,
             },
           ],
           temperature: 0.7,
@@ -36,8 +40,24 @@ export const useTextArea = () => {
       );
 
       const message = response.data.choices[0]?.message.content;
-      setResponse(message);
+      setConversation((prevState) => {
+        return [
+          ...prevState,
+          { from: "MeowGPT", message: message, id: uuidv4() },
+        ];
+      });
+      setValue("");
     } catch (error) {
+      if (axios.isAxiosError(error) && error.response) {
+        const statusCode = error.response.status;
+        if (statusCode === 429) {
+          toast.error("You are only allowed 3 messages every 1 minute");
+        } else {
+          toast.error("An error occurred");
+        }
+      } else {
+        toast.error("An unexpected error occurred");
+      }
       console.error("Error with OpenAI API:", error);
     }
   };
@@ -51,7 +71,9 @@ export const useTextArea = () => {
     textAreaHandler,
     submitHandler,
     stopTyping,
+    setValue,
     valid,
     typing,
+    value,
   };
 };

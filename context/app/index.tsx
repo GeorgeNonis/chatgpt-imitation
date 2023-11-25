@@ -1,32 +1,15 @@
 "use client";
 
-import {
-  Dispatch,
-  MutableRefObject,
-  ReactNode,
-  SetStateAction,
-  createContext,
-  useContext,
-  useRef,
-  useState,
-} from "react";
-import { LOREM_IPSUM } from "../../config";
-
-export interface AppContextI {
-  response: string;
-  typewriterRef: MutableRefObject<any>;
-  typing: boolean;
-  setTyping: Dispatch<SetStateAction<boolean>>;
-  setResponse: Dispatch<SetStateAction<string>>;
-  stopTyping: () => void;
-}
+import { ReactNode, createContext, useContext, useRef, useState } from "react";
+import toast from "react-hot-toast";
+import { AppContextI, ConversationI } from "./app.types";
 
 export const AppContext = createContext<AppContextI | null>(null);
-import toast from "react-hot-toast";
+
 export const AppContextProvier = ({ children }: { children: ReactNode }) => {
-  // const [response, setResponse] = useState("hey");
-  const [response, setResponse] = useState(LOREM_IPSUM);
+  const [conversation, setConversation] = useState<ConversationI[]>([]);
   const [typing, setTyping] = useState(false);
+
   const typewriterRef = useRef<any>(null);
 
   const stopTyping = () => {
@@ -40,10 +23,10 @@ export const AppContextProvier = ({ children }: { children: ReactNode }) => {
   return (
     <AppContext.Provider
       value={{
-        response,
         typewriterRef,
         typing,
-        setResponse,
+        conversation,
+        setConversation,
         stopTyping,
         setTyping,
       }}
@@ -53,6 +36,7 @@ export const AppContextProvier = ({ children }: { children: ReactNode }) => {
   );
 };
 
+// Context Guard
 export const useAppContext = () => {
   const context = useContext(AppContext);
   if (context === null) {

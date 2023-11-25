@@ -1,6 +1,8 @@
+import { User } from "@/components/chat/chat.types";
+
 export interface UserI {
-  src: string;
   height?: number;
   width?: number;
   alt?: string;
+  user: User;
 }

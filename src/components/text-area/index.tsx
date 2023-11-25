@@ -3,15 +3,25 @@ import { ArrowUp, PauseButton, ToolTip } from "..";
 import { useTextArea } from "./useTextArea";
 
 const TextArea = () => {
-  const { textAreaHandler, submitHandler, stopTyping, valid, typing } =
-    useTextArea();
+  const {
+    textAreaHandler,
+    submitHandler,
+    stopTyping,
+    setValue,
+    valid,
+    typing,
+    value,
+  } = useTextArea();
   return (
     <>
       <StyledTextArea>
         <StyledInput
+          value={value}
           onKeyDown={(e) => {
-            if (e.key === "Enter") {
+            if (e.key === "Enter" && !e.shiftKey) {
+              e.preventDefault();
               submitHandler();
+              setValue("");
             }
           }}
           rows={1}
@@ -38,7 +48,7 @@ const TextArea = () => {
         </ToolTip>
       </StyledTextArea>
       <StyledWarning>
-        ChatGPT can make mistakes. Consider checking important information.
+        MeowGPT can make mistakes. Consider checking important information.
       </StyledWarning>
     </>
   );

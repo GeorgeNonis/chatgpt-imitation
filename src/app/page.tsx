@@ -1,6 +1,12 @@
 "use client";
 
-import { Message, Intro, Proposals, TextArea } from "@/components";
+import {
+  Message,
+  Intro,
+  Proposals,
+  TextArea,
+  Conversation,
+} from "@/components";
 import {
   StyledChatGptchat,
   StyledMain,
@@ -9,13 +15,15 @@ import {
 import { useAppContext } from "../../context/app";
 
 const Home = () => {
-  const { response } = useAppContext();
+  const { conversation } = useAppContext();
+  const isThereConv = conversation.length > 0;
+
   return (
     <StyledMain>
       <StyledSideBar>Sidebar</StyledSideBar>
-      <StyledChatGptchat emptyChat={response.trim().length === 0}>
-        {response ? <Message src="/me.jpg" user="You" /> : <Intro />}
-        {!response && <Proposals />}
+      <StyledChatGptchat emptyChat={!isThereConv}>
+        {isThereConv ? <Conversation /> : <Intro />}
+        {!isThereConv && <Proposals />}
         <TextArea />
       </StyledChatGptchat>
     </StyledMain>
