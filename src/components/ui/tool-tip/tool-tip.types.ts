@@ -4,5 +4,6 @@ import { ReactNode } from "react";
 export interface ToolTipProps {
   children: ReactNode;
   tooltip: string;
+  off?: number;
   css?: CSS;
 }

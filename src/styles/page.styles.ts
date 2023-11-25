@@ -20,10 +20,10 @@ export const StyledChatGptchat = styled("div", {
   variants: {
     emptyChat: {
       true: {
-        gridTemplateRows: "11fr 1fr",
+        gridTemplateRows: "8fr 2fr 2fr .5fr",
       },
       false: {
-        gridTemplateRows: "11fr 1fr",
+        gridTemplateRows: "11fr 1fr .5fr",
       },
     },
   },

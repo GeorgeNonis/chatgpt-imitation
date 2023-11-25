@@ -1,6 +1,7 @@
 import { IdeaProposal } from "./types";
+import { shuffle } from "./utils";
 
-export const IDEAS: IdeaProposal[] = [
+export const IDEAS: IdeaProposal[] = shuffle([
   { title: "Give me ideas", idea: `for what to do with my kids' art` },
   {
     title: "Brainstorm incentives",
@@ -40,4 +41,4 @@ export const IDEAS: IdeaProposal[] = [
     title: "Propose activities",
     idea: "for a family reunion with all age groups",
   },
-];
+]);

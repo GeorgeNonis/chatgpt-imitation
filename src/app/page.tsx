@@ -11,7 +11,7 @@ const Home = () => {
   return (
     <StyledMain>
       <StyledSideBar>Sidebar</StyledSideBar>
-      <StyledChatGptchat emptyChat={false}>
+      <StyledChatGptchat emptyChat={true}>
         <Intro />
         <TextArea />
       </StyledChatGptchat>

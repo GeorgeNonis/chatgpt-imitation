@@ -20,6 +20,7 @@ const Idea = ({ title, idea }: IdeaProps) => {
         <StyledIdea>{idea}</StyledIdea>
       </StyledContent>
       <ToolTip
+        off={-10}
         tooltip="Click to send"
         css={{
           position: "absolute",

@@ -6,15 +6,16 @@ import {
   FloatingPortal,
   useInteractions,
   useHover,
+  offset,
 } from "@floating-ui/react";
 import { useState } from "react";
 import { ToolTipProps } from "./tool-tip.types";
 
-const ToolTip = ({ children, tooltip, css }: ToolTipProps) => {
+const ToolTip = ({ children, tooltip, css, off = 0 }: ToolTipProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const { refs, floatingStyles, context } = useFloating({
-    middleware: [flip(), shift()],
+    middleware: [flip(), shift(), offset(off)],
     open: false,
     onOpenChange: setIsOpen,
     placement: "top",
