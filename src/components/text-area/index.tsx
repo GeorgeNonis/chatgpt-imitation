@@ -32,11 +32,7 @@ const TextArea = () => {
           onChange={textAreaHandler}
         />
         {!isLoading ? (
-          <ToolTip
-            off={-10}
-            tooltip="Send Message"
-            css={{ display: "grid", placeContent: "center" }}
-          >
+          <ToolTip off={10} tooltip="Send Message">
             <ArrowUp
               onClick={submitHandler}
               theme="white"

@@ -21,4 +21,9 @@ export const StyledTooltip = styled("div", {
   },
 });
 
-export const StyledReference = styled("div", {});
+export const StyledReference = styled("div", {
+  display: "grid",
+  placeSelf: "center",
+  width: "fit-content",
+  height: "fit-content",
+});

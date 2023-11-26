@@ -20,17 +20,15 @@ const Idea = ({ title, idea }: IdeaI) => {
         <StyledIdea>{idea}</StyledIdea>
       </StyledContent>
       <ToolTip
-        off={-10}
+        off={10}
         tooltip="Click to send"
         css={{
           position: "absolute",
-          top: 0,
+          top: "50%",
+          transform: `translateY(-50%)`,
           right: 0,
-          bottom: 0,
           paddingRight: 8,
           paddingLeft: 8,
-          display: "grid",
-          placeContent: "center",
           background:
             "linear-gradient(to left, rgb(189 189 189 / 5%), rgba(0, 0, 0, 0))",
           ...(isHovered

@@ -47,7 +47,7 @@ const Message = ({ user, message, ...props }: ChatI) => {
             />
           </StyledTypeWriterWrapper>
           {!typing && (
-            <ToolTip tooltip="Copy" css={{ width: "fit-content" }} off={5}>
+            <ToolTip tooltip="Copy" css={{ placeSelf: "flex-start" }} off={5}>
               <FontAwesomeIcon
                 icon={faCopy}
                 style={{
