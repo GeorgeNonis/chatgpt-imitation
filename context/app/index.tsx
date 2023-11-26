@@ -8,8 +8,10 @@ export const AppContext = createContext<AppContextI | null>(null);
 
 export const AppContextProvier = ({ children }: { children: ReactNode }) => {
   const [loading, setLoading] = useState(false);
-  const [conversation, setConversation] = useState<ConversationI[]>([]);
   const [typing, setTyping] = useState(false);
+  const [conversation, setConversation] = useState<ConversationI[]>([]);
+
+  const controller = new AbortController();
 
   const typewriterRef = useRef<any>(null);
 
@@ -21,6 +23,22 @@ export const AppContextProvier = ({ children }: { children: ReactNode }) => {
     }
   };
 
+  const cancelRequest = () => {
+    toast.success("Successfully stoped the request");
+    console.log("aborted");
+
+    try {
+      controller.abort();
+      console.log("worked");
+    } catch (error) {
+      console.log({ error });
+    }
+  };
+
+  const stopButtonHandler = () => {
+    return loading ? cancelRequest : stopTyping;
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -30,8 +48,8 @@ export const AppContextProvier = ({ children }: { children: ReactNode }) => {
         loading,
         setLoading,
         setConversation,
-        stopTyping,
         setTyping,
+        stopTyping,
       }}
     >
       {children}

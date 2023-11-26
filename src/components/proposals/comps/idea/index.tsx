@@ -8,12 +8,13 @@ import {
 } from "./idea.styles";
 import { useState } from "react";
 
-const Idea = ({ title, idea }: IdeaI) => {
+const Idea = ({ title, idea, sendQuestionHandler }: IdeaI) => {
   const [isHovered, setIsHovered] = useState(false);
   return (
     <StyledIdeaContainer
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      onClick={() => sendQuestionHandler({ value: `${title} ${idea}` })}
     >
       <StyledContent>
         <StyledTitle>{title}</StyledTitle>

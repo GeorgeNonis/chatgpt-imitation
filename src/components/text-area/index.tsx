@@ -1,5 +1,5 @@
 import { StyledInput, StyledTextArea, StyledWarning } from "./text-area.styles";
-import { ArrowUp, PauseButton, ToolTip } from "..";
+import { ArrowUp, StopButton, ToolTip } from "..";
 import { useTextArea } from "./useTextArea";
 
 const TextArea = () => {
@@ -41,7 +41,7 @@ const TextArea = () => {
             />
           </ToolTip>
         ) : (
-          <PauseButton onClick={stopTyping} />
+          <StopButton onClick={stopTyping} />
         )}
       </StyledTextArea>
       <StyledWarning>
