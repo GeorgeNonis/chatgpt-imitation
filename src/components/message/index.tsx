@@ -1,6 +1,4 @@
 "use client";
-
-import Typewriter from "typewriter-effect";
 import {
   StyledChat,
   StyledChatWrapper,
@@ -8,14 +6,11 @@ import {
   StyledTextWrapper,
   StyledTypeWriterWrapper,
 } from "./message.styles";
-import { ToolTip, User } from "..";
+import { User } from "..";
 import { ChatI } from "./message.types";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCopy } from "@fortawesome/free-solid-svg-icons";
 import { useChat } from "./useChat";
 import ReactLoading from "react-loading";
-import UserMessage from "./comps/user-message";
-import MeowGPT from "./comps/meowGPT-message";
+import { Copy, MeowGPT, UserMessage } from "./comps";
 
 const Message = ({ user, message, canCopy, ...props }: ChatI) => {
   const { copyToClipboard, setTyping, typewriterRef } = useChat({
@@ -44,19 +39,7 @@ const Message = ({ user, message, canCopy, ...props }: ChatI) => {
               <UserMessage>{message}</UserMessage>
             )}
           </StyledTypeWriterWrapper>
-          {!canCopy && !onGoingRequest && (
-            <ToolTip tooltip="Copy" css={{ placeSelf: "flex-start" }} off={5}>
-              <FontAwesomeIcon
-                icon={faCopy}
-                style={{
-                  color: "white",
-                  marginTop: 10,
-                  cursor: "pointer",
-                }}
-                onClick={copyToClipboard}
-              />
-            </ToolTip>
-          )}
+          {!canCopy && !onGoingRequest && <Copy onClick={copyToClipboard} />}
         </StyledTextWrapper>
       </StyledChat>
     </StyledChatWrapper>
