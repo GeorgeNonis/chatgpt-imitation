@@ -12,6 +12,7 @@ export const StyledSideBar = styled("div", {
 });
 
 export const StyledChatGptchat = styled("div", {
+  position: "relative",
   display: "grid",
   height: "100vh",
   backgroundColor: "rgba(52,53,65,1)",

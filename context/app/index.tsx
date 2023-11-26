@@ -8,8 +8,8 @@ export const AppContext = createContext<AppContextI | null>(null);
 
 export const AppContextProvier = ({ children }: { children: ReactNode }) => {
   const [loading, setLoading] = useState(false);
-  const [conversation, setConversation] = useState<ConversationI[]>([]);
   const [typing, setTyping] = useState(false);
+  const [conversation, setConversation] = useState<ConversationI[]>([]);
 
   const typewriterRef = useRef<any>(null);
 
@@ -30,8 +30,8 @@ export const AppContextProvier = ({ children }: { children: ReactNode }) => {
         loading,
         setLoading,
         setConversation,
-        stopTyping,
         setTyping,
+        stopTyping,
       }}
     >
       {children}
