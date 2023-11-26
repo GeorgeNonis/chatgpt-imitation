@@ -1,6 +1,4 @@
 "use client";
-
-import Typewriter from "typewriter-effect";
 import {
   StyledChat,
   StyledChatWrapper,
@@ -8,16 +6,19 @@ import {
   StyledTextWrapper,
   StyledTypeWriterWrapper,
 } from "./message.styles";
-import { ToolTip, User } from "..";
+import { User } from "..";
 import { ChatI } from "./message.types";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCopy } from "@fortawesome/free-solid-svg-icons";
 import { useChat } from "./useChat";
+import ReactLoading from "react-loading";
+import { Copy, MeowGPT, UserMessage } from "./comps";
 
 const Message = ({ user, message, canCopy, ...props }: ChatI) => {
   const { copyToClipboard, setTyping, typewriterRef } = useChat({
     message,
   });
+
+  const onGoingRequest = message === "Loading";
+  const meowGPT = user === "MeowGPT";
 
   return (
     <StyledChatWrapper>
@@ -26,39 +27,19 @@ const Message = ({ user, message, canCopy, ...props }: ChatI) => {
         <StyledTextWrapper>
           <StyledText>{user}</StyledText>
           <StyledTypeWriterWrapper>
-            <Typewriter
-              onInit={(typewriter) => {
-                typewriterRef.current = typewriter;
-                setTyping(true);
-                typewriter
-                  .typeString(message)
-                  .callFunction(() => {
-                    setTyping(false);
-                  })
-                  .start();
-              }}
-              options={{
-                autoStart: true,
-                loop: false,
-                deleteSpeed: 0,
-                cursor: "",
-                delay: 0.01,
-              }}
-            />
-          </StyledTypeWriterWrapper>
-          {!canCopy && (
-            <ToolTip tooltip="Copy" css={{ placeSelf: "flex-start" }} off={5}>
-              <FontAwesomeIcon
-                icon={faCopy}
-                style={{
-                  color: "white",
-                  marginTop: 10,
-                  cursor: "pointer",
-                }}
-                onClick={copyToClipboard}
+            {onGoingRequest ? (
+              <ReactLoading type={"bubbles"} color={"gray"} />
+            ) : meowGPT ? (
+              <MeowGPT
+                message={message}
+                setTyping={setTyping}
+                typewriterRef={typewriterRef}
               />
-            </ToolTip>
-          )}
+            ) : (
+              <UserMessage>{message}</UserMessage>
+            )}
+          </StyledTypeWriterWrapper>
+          {!canCopy && !onGoingRequest && <Copy onClick={copyToClipboard} />}
         </StyledTextWrapper>
       </StyledChat>
     </StyledChatWrapper>
