@@ -9,6 +9,7 @@ export const AppContext = createContext<AppContextI | null>(null);
 export const AppContextProvier = ({ children }: { children: ReactNode }) => {
   const [loading, setLoading] = useState(false);
   const [typing, setTyping] = useState(false);
+  const [storedConvs, setStoredConvs] = useState<ConversationI[][]>([]);
   const [conversation, setConversation] = useState<ConversationI[]>([]);
 
   const typewriterRef = useRef<any>(null);
