@@ -14,8 +14,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCopy } from "@fortawesome/free-solid-svg-icons";
 import { useChat } from "./useChat";
 
-const Message = ({ user, message, ...props }: ChatI) => {
-  const { copyToClipboard, setTyping, typewriterRef, typing } = useChat({
+const Message = ({ user, message, canCopy, ...props }: ChatI) => {
+  const { copyToClipboard, setTyping, typewriterRef } = useChat({
     message,
   });
 
@@ -46,7 +46,7 @@ const Message = ({ user, message, ...props }: ChatI) => {
               }}
             />
           </StyledTypeWriterWrapper>
-          {!typing && (
+          {!canCopy && (
             <ToolTip tooltip="Copy" css={{ placeSelf: "flex-start" }} off={5}>
               <FontAwesomeIcon
                 icon={faCopy}
