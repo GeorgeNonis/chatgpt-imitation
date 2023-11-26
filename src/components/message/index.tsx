@@ -14,6 +14,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCopy } from "@fortawesome/free-solid-svg-icons";
 import { useChat } from "./useChat";
 import ReactLoading from "react-loading";
+import UserMessage from "./comps/user-message";
+import MeowGPT from "./comps/meowGPT-message";
 
 const Message = ({ user, message, canCopy, ...props }: ChatI) => {
   const { copyToClipboard, setTyping, typewriterRef } = useChat({
@@ -21,6 +23,7 @@ const Message = ({ user, message, canCopy, ...props }: ChatI) => {
   });
 
   const onGoingRequest = message === "Loading";
+  const meowGPT = user === "MeowGPT";
 
   return (
     <StyledChatWrapper>
@@ -31,26 +34,14 @@ const Message = ({ user, message, canCopy, ...props }: ChatI) => {
           <StyledTypeWriterWrapper>
             {onGoingRequest ? (
               <ReactLoading type={"bubbles"} color={"gray"} />
-            ) : (
-              <Typewriter
-                onInit={(typewriter) => {
-                  typewriterRef.current = typewriter;
-                  setTyping(true);
-                  typewriter
-                    .typeString(message)
-                    .callFunction(() => {
-                      setTyping(false);
-                    })
-                    .start();
-                }}
-                options={{
-                  autoStart: true,
-                  loop: false,
-                  deleteSpeed: 0,
-                  cursor: "",
-                  delay: 0.01,
-                }}
+            ) : meowGPT ? (
+              <MeowGPT
+                message={message}
+                setTyping={setTyping}
+                typewriterRef={typewriterRef}
               />
+            ) : (
+              <UserMessage>{message}</UserMessage>
             )}
           </StyledTypeWriterWrapper>
           {!canCopy && !onGoingRequest && (
