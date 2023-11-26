@@ -3,6 +3,7 @@ import axios from "axios";
 import { useAppContext } from "../../../context/app";
 import toast from "react-hot-toast";
 import { v4 as uuidv4 } from "uuid";
+import { axiosInstance } from "../../../axios";
 
 export const useTextArea = () => {
   const { stopTyping, setConversation, setLoading, typing, loading } =
@@ -18,40 +19,48 @@ export const useTextArea = () => {
   };
 
   const submitHandler = async () => {
+    // Guard
     if (value.trim().length === 0) return;
-    setLoading(true);
+
+    const loadingDummyId = uuidv4();
+
     setConversation((prevState) => {
       return [...prevState, { from: "You", message: value, id: uuidv4() }];
     });
+
+    setLoading(true);
     setValue("");
 
+    // Add a dummy object in the array which then will be removed or replaced with actuall message
+    setConversation((prevState) => {
+      return [
+        ...prevState,
+        { from: "MeowGPT", message: "Loading", id: loadingDummyId },
+      ];
+    });
+
     try {
-      const response = await axios.post(
-        "https://api.openai.com/v1/chat/completions",
-        {
-          model: "gpt-3.5-turbo",
-          messages: [
-            {
-              role: "user",
-              content: value,
-            },
-          ],
-          temperature: 0.7,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${process.env.NEXT_PUBLIC_OPEN_API_KEY}`,
+      const response = await axiosInstance.post("", {
+        model: "gpt-3.5-turbo",
+        messages: [
+          {
+            role: "user",
+            content: value,
           },
-        }
-      );
+        ],
+        temperature: 0.7,
+      });
 
       const message = response.data.choices[0]?.message.content;
+
       setConversation((prevState) => {
-        return [
-          ...prevState,
-          { from: "MeowGPT", message: message, id: uuidv4() },
-        ];
+        const replaceDummy = prevState.map((c) => {
+          if (c.id === loadingDummyId) {
+            return { ...c, message: message };
+          }
+          return c;
+        });
+        return [...replaceDummy];
       });
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
@@ -64,6 +73,12 @@ export const useTextArea = () => {
       } else {
         toast.error("An unexpected error occurred");
       }
+      // Take of the dummy "state" in case an error
+      setConversation((prevState) => {
+        const removeDummy = prevState.filter((c) => c.id !== loadingDummyId);
+
+        return [...removeDummy];
+      });
       console.error("Error with OpenAI API:", error);
     }
     setLoading(false);

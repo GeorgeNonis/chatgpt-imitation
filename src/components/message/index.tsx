@@ -13,11 +13,14 @@ import { ChatI } from "./message.types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCopy } from "@fortawesome/free-solid-svg-icons";
 import { useChat } from "./useChat";
+import ReactLoading from "react-loading";
 
 const Message = ({ user, message, canCopy, ...props }: ChatI) => {
   const { copyToClipboard, setTyping, typewriterRef } = useChat({
     message,
   });
+
+  const onGoingRequest = message === "Loading";
 
   return (
     <StyledChatWrapper>
@@ -26,27 +29,31 @@ const Message = ({ user, message, canCopy, ...props }: ChatI) => {
         <StyledTextWrapper>
           <StyledText>{user}</StyledText>
           <StyledTypeWriterWrapper>
-            <Typewriter
-              onInit={(typewriter) => {
-                typewriterRef.current = typewriter;
-                setTyping(true);
-                typewriter
-                  .typeString(message)
-                  .callFunction(() => {
-                    setTyping(false);
-                  })
-                  .start();
-              }}
-              options={{
-                autoStart: true,
-                loop: false,
-                deleteSpeed: 0,
-                cursor: "",
-                delay: 0.01,
-              }}
-            />
+            {onGoingRequest ? (
+              <ReactLoading type={"bubbles"} color={"gray"} />
+            ) : (
+              <Typewriter
+                onInit={(typewriter) => {
+                  typewriterRef.current = typewriter;
+                  setTyping(true);
+                  typewriter
+                    .typeString(message)
+                    .callFunction(() => {
+                      setTyping(false);
+                    })
+                    .start();
+                }}
+                options={{
+                  autoStart: true,
+                  loop: false,
+                  deleteSpeed: 0,
+                  cursor: "",
+                  delay: 0.01,
+                }}
+              />
+            )}
           </StyledTypeWriterWrapper>
-          {!canCopy && (
+          {!canCopy && !onGoingRequest && (
             <ToolTip tooltip="Copy" css={{ placeSelf: "flex-start" }} off={5}>
               <FontAwesomeIcon
                 icon={faCopy}
