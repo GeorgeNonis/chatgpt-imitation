@@ -10,12 +10,15 @@ export const useTextArea = () => {
   const [value, setValue] = useState("");
   const [valid, setValid] = useState(false);
 
+  const isLoading = typing || loading;
+
   const textAreaHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
     const { value } = e.target;
     setValue(value);
   };
 
   const submitHandler = async () => {
+    if (value.trim().length === 0) return;
     setLoading(true);
     setConversation((prevState) => {
       return [...prevState, { from: "You", message: value, id: uuidv4() }];
@@ -70,8 +73,6 @@ export const useTextArea = () => {
     const validText = value.trim().length > 0;
     setValid(validText);
   }, [value]);
-
-  const isLoading = typing || loading;
 
   return {
     textAreaHandler,

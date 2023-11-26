@@ -18,6 +18,7 @@ const TextArea = () => {
         <StyledInput
           value={value}
           onKeyDown={(e) => {
+            if (isLoading) return;
             if (e.key === "Enter" && !e.shiftKey) {
               e.preventDefault();
               submitHandler();
@@ -31,7 +32,7 @@ const TextArea = () => {
           onChange={textAreaHandler}
         />
         <ToolTip
-          off={10}
+          off={-25}
           tooltip="Send Message"
           css={{ display: "grid", placeContent: "center" }}
         >

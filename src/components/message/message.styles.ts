@@ -8,7 +8,6 @@ export const StyledChat = styled("div", {
 });
 
 export const StyledChatWrapper = styled("div", {
-  overflowY: "auto",
   marginBottom: 24,
 });
 

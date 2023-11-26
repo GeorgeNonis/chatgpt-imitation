@@ -1,4 +1,4 @@
-import { User } from "@/components/message/chat.types";
+import { User } from "@/components/message/message.types";
 
 export interface UserI {
   height?: number;
