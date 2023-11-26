@@ -11,8 +11,6 @@ export const AppContextProvier = ({ children }: { children: ReactNode }) => {
   const [typing, setTyping] = useState(false);
   const [conversation, setConversation] = useState<ConversationI[]>([]);
 
-  const controller = new AbortController();
-
   const typewriterRef = useRef<any>(null);
 
   const stopTyping = () => {
@@ -21,22 +19,6 @@ export const AppContextProvier = ({ children }: { children: ReactNode }) => {
       setTyping(false);
       toast.success("Stoped Typing");
     }
-  };
-
-  const cancelRequest = () => {
-    toast.success("Successfully stoped the request");
-    console.log("aborted");
-
-    try {
-      controller.abort();
-      console.log("worked");
-    } catch (error) {
-      console.log({ error });
-    }
-  };
-
-  const stopButtonHandler = () => {
-    return loading ? cancelRequest : stopTyping;
   };
 
   return (
