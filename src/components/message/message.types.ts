@@ -4,4 +4,5 @@ export type User = "You" | "MeowGPT";
 export type ChatI = {
   user: User;
   message: string;
+  canCopy:boolean
 } & UserI;

@@ -5,10 +5,23 @@ import { faArrowCircleDown } from "@fortawesome/free-solid-svg-icons";
 import { useConversation } from "./useConversation";
 
 const Conversation = () => {
-  const { conversation, showScrollDownArrow, containerRef, scrollToBottom } =
-    useConversation();
+  const {
+    conversation,
+    showScrollDownArrow,
+    containerRef,
+    typing,
+    scrollToBottom,
+  } = useConversation();
   const conv = conversation.map((inf, i) => {
-    return <Message key={i} user={inf.from} message={inf.message} />;
+    const lastIndex = conversation.length - 1;
+    return (
+      <Message
+        key={i}
+        user={inf.from}
+        message={inf.message}
+        canCopy={conversation[lastIndex].message === inf.message && typing}
+      />
+    );
   });
   return (
     <StyledConversation ref={containerRef}>
