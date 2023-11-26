@@ -31,22 +31,22 @@ const TextArea = () => {
           placeholder="Message me 😶‍🌫️..."
           onChange={textAreaHandler}
         />
-        <ToolTip
-          off={-25}
-          tooltip="Send Message"
-          css={{ display: "grid", placeContent: "center" }}
-        >
-          {!isLoading ? (
+        {!isLoading ? (
+          <ToolTip
+            off={-10}
+            tooltip="Send Message"
+            css={{ display: "grid", placeContent: "center" }}
+          >
             <ArrowUp
               onClick={submitHandler}
               theme="white"
               css={{ height: 20, width: 20 }}
               isValid={valid}
             />
-          ) : (
-            <PauseButton onClick={stopTyping} />
-          )}
-        </ToolTip>
+          </ToolTip>
+        ) : (
+          <PauseButton onClick={stopTyping} />
+        )}
       </StyledTextArea>
       <StyledWarning>
         MeowGPT can make mistakes. Consider checking important information.

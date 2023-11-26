@@ -14,6 +14,8 @@ const PauseButton = ({ onClick }: { onClick: () => void }) => {
         height: "20px",
         color: "white",
         background: "#343541",
+        display: "grid",
+        placeSelf: "center",
       }}
     />
   );
