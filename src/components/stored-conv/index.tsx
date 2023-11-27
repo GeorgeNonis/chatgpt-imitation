@@ -7,10 +7,9 @@ const StoredConversations = () => {
 
   return (
     <StyledStoredConversation>
-      {storedConvs.length > 0 &&
-        storedConvs.map((conv, i) => {
-          return <StoredConversation key={i}>{conv.id}</StoredConversation>;
-        })}
+      {storedConvs.map((conv, i) => {
+        return <StoredConversation key={i}>{conv.id}</StoredConversation>;
+      })}
     </StyledStoredConversation>
   );
 };

@@ -7,8 +7,6 @@ import { v4 as uuidv4 } from "uuid";
 
 export const AppContext = createContext<AppContextI | null>(null);
 
-const dummy = { id: "", conversation: [{ from: "You", message: "" }] };
-
 export const AppContextProvier = ({ children }: { children: ReactNode }) => {
   const [loading, setLoading] = useState(false);
   const [typing, setTyping] = useState(false);
@@ -17,7 +15,7 @@ export const AppContextProvier = ({ children }: { children: ReactNode }) => {
     id: uuidv4(),
     conversation: [],
   });
-
+  console.log({ storedConvs });
   const typewriterRef = useRef<any>(null);
 
   const stopTyping = () => {
@@ -51,6 +49,7 @@ export const AppContextProvier = ({ children }: { children: ReactNode }) => {
         return [...updatedState];
       });
     }
+    setStoredConvs((prevState) => [...prevState, { ...conversation }]);
 
     // Check if theres already archived
 
@@ -64,13 +63,12 @@ export const AppContextProvier = ({ children }: { children: ReactNode }) => {
         typing,
         conversation,
         loading,
-        // currentConversation,
         storedConvs,
         setLoading,
         setConversation,
         setTyping,
         stopTyping,
-        // setCurrentConversation,
+        newConversation,
         setStoredConvs,
         selectConversation,
       }}

@@ -16,13 +16,12 @@ export interface AppContextI {
   typing: boolean;
   conversation: ConversationI;
   loading: boolean;
-  // currentConversation: string;
   storedConvs: ConversationI[];
   setTyping: Dispatch<SetStateAction<boolean>>;
   stopTyping: () => void;
   setConversation: Dispatch<SetStateAction<ConversationI>>;
   setLoading: Dispatch<SetStateAction<boolean>>;
-  // setCurrentConversation: Dispatch<SetStateAction<string>>;
+  newConversation: () => void;
   setStoredConvs: Dispatch<SetStateAction<ConversationI[]>>;
   selectConversation: ({ id }: { id: string }) => void;
 }

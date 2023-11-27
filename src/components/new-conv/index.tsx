@@ -2,10 +2,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { StyledNewConversation, StyledText } from "./new-conv.styles";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import Image from "next/image";
+import { useAppContext } from "../../../context/app";
 
 const NewConversation = () => {
+  const { newConversation } = useAppContext();
   return (
-    <StyledNewConversation>
+    <StyledNewConversation onClick={newConversation}>
       <Image src={"/cat.png"} height={30} width={30} alt="MeowGPT" />
       <StyledText>MeoewGPT</StyledText>{" "}
       <FontAwesomeIcon
