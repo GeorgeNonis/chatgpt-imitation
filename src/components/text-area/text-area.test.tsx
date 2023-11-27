@@ -3,22 +3,50 @@ import "@testing-library/jest-dom/extend-expect";
 import TextArea from ".";
 
 describe("TextArea", () => {
-  it("Does alot of stuff lol", () => {
+  it("Expect Textarea to be rendered", () => {
     const mockSendQuestionHandler = jest.fn();
-    const isLoading = true;
-
-    const arrowId = "onclick";
+    const isLoading = false;
 
     render(
       <TextArea
         sendQuestionHandler={mockSendQuestionHandler}
         isLoading={isLoading}
-        data-testid={arrowId}
       />
     );
+    const textarea = screen.getByTestId("text-area");
+    expect(textarea).toBeInTheDocument();
+  });
 
-    const arrow = screen.getByTestId(arrowId);
+  it("Expect sendQuestionHandler to be called once", () => {
+    const mockSendQuestionHandler = jest.fn();
+    const isLoading = false;
 
-    fireEvent.click(arrow);
+    render(
+      <TextArea
+        sendQuestionHandler={mockSendQuestionHandler}
+        isLoading={isLoading}
+      />
+    );
+    const textarea = screen.getByTestId("text-area");
+    fireEvent.change(textarea, { target: { value: "Test message" } });
+    fireEvent.keyDown(textarea, { key: "Enter", shiftKey: false });
+
+    expect(mockSendQuestionHandler).toHaveBeenCalled();
+  });
+  it("Expect sendQuestionHandler to dont be called", () => {
+    const mockSendQuestionHandler = jest.fn();
+    const isLoading = true;
+
+    render(
+      <TextArea
+        sendQuestionHandler={mockSendQuestionHandler}
+        isLoading={isLoading}
+      />
+    );
+    const textarea = screen.getByTestId("text-area");
+    fireEvent.change(textarea, { target: { value: "Test message" } });
+    fireEvent.keyDown(textarea, { key: "Enter", shiftKey: false });
+
+    expect(mockSendQuestionHandler).not.toHaveBeenCalled();
   });
 });

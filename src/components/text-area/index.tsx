@@ -14,6 +14,7 @@ const TextArea = ({
     <>
       <StyledTextArea>
         <StyledInput
+          data-testid="text-area"
           value={value}
           onKeyDown={(e: KeyboardEvent) => {
             if (isLoading) return;
