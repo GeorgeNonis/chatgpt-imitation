@@ -16,7 +16,7 @@ export const AppContextProvier = ({ children }: { children: ReactNode }) => {
     id: currentConv,
     conversation: [],
   });
-  console.log({ storedConvs });
+
   const typewriterRef = useRef<any>(null);
 
   const stopTyping = () => {
