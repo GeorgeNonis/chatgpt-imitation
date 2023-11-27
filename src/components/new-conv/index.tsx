@@ -6,11 +6,13 @@ import { useAppContext } from "../../../context/app";
 
 const NewConversation = () => {
   const { newConversation, loading, typing } = useAppContext();
+  console.log({ loading, typing });
+  const clickHandler = () => {
+    if (loading || typing) return;
+    newConversation();
+  };
   return (
-    <StyledNewConversation
-      onClick={!loading || !typing ? newConversation : () => null}
-      loading={loading || typing}
-    >
+    <StyledNewConversation onClick={clickHandler} loading={loading || typing}>
       <Image src={"/cat.png"} height={30} width={30} alt="MeowGPT" />
       <StyledText>MeoewGPT</StyledText>{" "}
       <FontAwesomeIcon

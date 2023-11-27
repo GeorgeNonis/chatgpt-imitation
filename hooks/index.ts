@@ -43,6 +43,7 @@ export const useService = () => {
       // HTTP REQ
       const message = await sendQuestion({ value });
 
+      // Replace the dummy state with the actuall message from the response
       setConversation((prevState) => {
         const replaceDummy = prevState.conversation.map((c) => {
           if (c.id === loadingDummyId) {
@@ -64,7 +65,7 @@ export const useService = () => {
       } else {
         toast.error("An unexpected error occurred");
       }
-      // Take of the dummy "state" in case an error
+      // Take of the dummy "state" off in case an error
       setConversation((prevState) => {
         const removeDummy = prevState.conversation.filter(
           (c) => c.id !== loadingDummyId
