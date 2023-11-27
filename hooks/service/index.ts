@@ -1,12 +1,10 @@
 import { v4 as uuidv4 } from "uuid";
-import { useAppContext } from "../context/app";
-import { sendQuestion } from "../services/post";
+import { sendQuestion } from "../../services/post";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { UseServiceI } from "./services.types";
 
-export const useService = () => {
-  const { setConversation, setLoading, setCurrentMsgId } = useAppContext();
-
+export const useService = ({ setConversation, setLoading }: UseServiceI) => {
   const sendQuestionHandler = async ({ value }: { value: string }) => {
     const loadingDummyId = uuidv4();
 
@@ -53,7 +51,6 @@ export const useService = () => {
         });
         return { ...prevState, conversation: [...replaceDummy] };
       });
-      setCurrentMsgId(loadingDummyId);
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
         const statusCode = error.response.status;

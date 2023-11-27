@@ -1,21 +1,16 @@
 import { ChangeEvent, useEffect, useState } from "react";
-import { useAppContext } from "../../../context/app";
-import { useService } from "../../../hooks";
+import { UseTextAreaI } from "./text-area.types";
 
-export const useTextArea = () => {
-  const { typing, loading } = useAppContext();
+export const useTextArea = ({ sendQuestionHandler }: UseTextAreaI) => {
   const [value, setValue] = useState("");
   const [valid, setValid] = useState(false);
-  const { sendQuestionHandler } = useService();
 
-  const isLoading = typing || loading;
-
-  const textAreaHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
+  const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
     const { value } = e.target;
     setValue(value);
   };
 
-  const submitHandler = async () => {
+  const onSumbitHandler = async () => {
     // Guard
     if (value.trim().length === 0) return;
 
@@ -28,11 +23,10 @@ export const useTextArea = () => {
   }, [value]);
 
   return {
-    textAreaHandler,
-    submitHandler,
+    onChangeHandler,
+    onSumbitHandler,
     setValue,
     valid,
-    isLoading,
     value,
   };
 };

@@ -2,17 +2,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { StyledNewConversation, StyledText } from "./new-conv.styles";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import Image from "next/image";
-import { useAppContext } from "../../../context/app";
 
 const NewConversation = () => {
-  const { newConversation, loading, typing } = useAppContext();
-  console.log({ loading, typing });
-  const clickHandler = () => {
-    if (loading || typing) return;
-    newConversation();
-  };
   return (
-    <StyledNewConversation onClick={clickHandler} loading={loading || typing}>
+    <StyledNewConversation>
       <Image src={"/cat.png"} height={30} width={30} alt="MeowGPT" />
       <StyledText>MeoewGPT</StyledText>{" "}
       <FontAwesomeIcon

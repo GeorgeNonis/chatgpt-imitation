@@ -13,22 +13,15 @@ export const StyledStoredConv = styled("div", {
   overflow: "hidden",
 
   transition: "all .1s ease-in-out",
+  "&:hover": {
+    backgroundColor: "rgb(128 128 128 / 19%)",
+  },
+  cursor: "pointer",
 
   variants: {
     selected: {
       true: {
         backgroundColor: "rgb(128 128 128 / 19%)",
-      },
-    },
-    loading: {
-      true: {
-        cursor: "unset",
-      },
-      false: {
-        "&:hover": {
-          backgroundColor: "rgb(128 128 128 / 19%)",
-        },
-        cursor: "pointer",
       },
     },
   },

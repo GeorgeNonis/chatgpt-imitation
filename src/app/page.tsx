@@ -14,10 +14,12 @@ import {
   StyledMain,
   StyledSideBar,
 } from "../styles/page.styles";
-import { useAppContext } from "../../context/app";
+import { useApp } from "../../hooks/app";
 
 const Home = () => {
-  const { conversation } = useAppContext();
+  const { handlers, values } = useApp();
+  const { conversation, isLoading, typing } = values;
+  const { sendQuestionHandler, setTyping } = handlers;
   const isThereConv = conversation.conversation.length > 0;
 
   return (
@@ -28,9 +30,20 @@ const Home = () => {
       </StyledSideBar>
       <StyledChatGptchat emptyChat={!isThereConv}>
         <Header />
-        {isThereConv ? <Conversation /> : <Intro />}
+        {isThereConv ? (
+          <Conversation
+            conversation={conversation}
+            typing={typing}
+            setTyping={setTyping}
+          />
+        ) : (
+          <Intro />
+        )}
         {!isThereConv && <Proposals />}
-        <TextArea />
+        <TextArea
+          isLoading={isLoading}
+          sendQuestionHandler={sendQuestionHandler}
+        />
       </StyledChatGptchat>
     </StyledMain>
   );

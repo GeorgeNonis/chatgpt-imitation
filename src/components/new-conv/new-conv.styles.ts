@@ -10,19 +10,10 @@ export const StyledNewConversation = styled("div", {
   borderRadius: 10,
   transition: "all .1s ease-in-out",
 
-  variants: {
-    loading: {
-      true: {
-        cursor: "unset",
-      },
-      false: {
-        "&:hover": {
-          backgroundColor: "rgb(128 128 128 / 19%)",
-        },
-        cursor: "pointer",
-      },
-    },
+  "&:hover": {
+    backgroundColor: "rgb(128 128 128 / 19%)",
   },
+  cursor: "pointer",
 });
 
 export const StyledText = styled("span", {});

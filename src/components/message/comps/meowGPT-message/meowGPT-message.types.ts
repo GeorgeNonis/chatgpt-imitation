@@ -1,6 +1,7 @@
-import { ConvI } from "../../../../../context/app/app.types";
+import { Dispatch, SetStateAction } from "react";
+import { ConvI } from "../../../../../hooks/app/app.types";
 
 export interface MeowGPTI {
   message: ConvI["message"];
-  id: ConvI["id"];
+  setTyping: Dispatch<SetStateAction<boolean>>;
 }

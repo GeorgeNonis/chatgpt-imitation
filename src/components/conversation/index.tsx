@@ -3,21 +3,18 @@ import { StyledConversation } from "./conversation.styles";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowCircleDown } from "@fortawesome/free-solid-svg-icons";
 import { useConversation } from "./useConversation";
+import { ConversationIn } from "./conversation.types";
 
-const Conversation = () => {
-  const {
-    conversation,
-    showScrollDownArrow,
-    containerRef,
-    typing,
-    scrollToBottom,
-  } = useConversation();
+const Conversation = ({ conversation, typing, setTyping }: ConversationIn) => {
+  const { showScrollDownArrow, containerRef, scrollToBottom } =
+    useConversation();
 
   const conv = conversation.conversation.map((inf, i) => {
     const lastIndex = conversation.conversation.length - 1;
     return (
       <Message
         {...inf}
+        setTyping={setTyping}
         key={i}
         canCopy={
           conversation.conversation[lastIndex].message === inf.message && typing
