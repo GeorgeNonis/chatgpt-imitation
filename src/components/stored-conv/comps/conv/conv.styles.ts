@@ -17,6 +17,14 @@ export const StyledStoredConv = styled("div", {
   "&:hover": {
     backgroundColor: "rgb(128 128 128 / 19%)",
   },
+
+  variants: {
+    selected: {
+      true: {
+        backgroundColor: "rgb(128 128 128 / 19%)",
+      },
+    },
+  },
 });
 
 export const StyledCover = styled("div", {

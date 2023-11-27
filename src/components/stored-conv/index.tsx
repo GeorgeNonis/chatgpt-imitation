@@ -8,7 +8,11 @@ const StoredConversations = () => {
   return (
     <StyledStoredConversation>
       {storedConvs.map((conv, i) => {
-        return <StoredConversation key={i}>{conv.id}</StoredConversation>;
+        return (
+          <StoredConversation key={i} id={conv.id}>
+            {conv.id}
+          </StoredConversation>
+        );
       })}
     </StyledStoredConversation>
   );

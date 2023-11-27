@@ -11,8 +11,9 @@ export const AppContextProvier = ({ children }: { children: ReactNode }) => {
   const [loading, setLoading] = useState(false);
   const [typing, setTyping] = useState(false);
   const [storedConvs, setStoredConvs] = useState<ConversationI[]>([]);
+  const [currentConv, setCurrentConv] = useState<ConversationI["id"]>(uuidv4());
   const [conversation, setConversation] = useState<ConversationI>({
-    id: uuidv4(),
+    id: currentConv,
     conversation: [],
   });
   console.log({ storedConvs });
@@ -27,13 +28,16 @@ export const AppContextProvier = ({ children }: { children: ReactNode }) => {
   };
 
   const selectConversation = ({ id }: { id: string }) => {
+    if (currentConv === id) return;
     const findConv = storedConvs.find((conv) => conv.id === id);
     if (findConv?.conversation) {
+      setCurrentConv(findConv.id);
       setConversation({ ...findConv });
     }
   };
 
   const newConversation = () => {
+    if (conversation.conversation.length === 0) return;
     const convId = conversation?.id;
 
     const doesItExist = storedConvs.some((conv) => conv.id === convId);
@@ -48,12 +52,12 @@ export const AppContextProvier = ({ children }: { children: ReactNode }) => {
         });
         return [...updatedState];
       });
+    } else {
+      setStoredConvs((prevState) => [...prevState, { ...conversation }]);
     }
-    setStoredConvs((prevState) => [...prevState, { ...conversation }]);
-
-    // Check if theres already archived
-
-    setConversation({ id: uuidv4(), conversation: [] });
+    const generatenewId = uuidv4();
+    setCurrentConv(generatenewId);
+    setConversation({ id: generatenewId, conversation: [] });
   };
 
   return (
@@ -64,6 +68,7 @@ export const AppContextProvier = ({ children }: { children: ReactNode }) => {
         conversation,
         loading,
         storedConvs,
+        currentConv,
         setLoading,
         setConversation,
         setTyping,

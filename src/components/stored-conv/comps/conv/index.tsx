@@ -1,10 +1,19 @@
 import { ReactNode } from "react";
-import { StyledShadow, StyledStoredConv } from "./conv.styles";
+import { StyledStoredConv } from "./conv.styles";
+import { useAppContext } from "../../../../../context/app";
 
-const StoredConversation = ({ children }: { children: ReactNode }) => {
+export interface StoredConversationI {
+  children: ReactNode;
+  id: string;
+}
+
+const StoredConversation = ({ children, id }: StoredConversationI) => {
+  const { selectConversation, currentConv } = useAppContext();
   return (
-    <StyledStoredConv>
-      {/* <StyledShadow /> */}
+    <StyledStoredConv
+      onClick={() => selectConversation({ id })}
+      selected={id === currentConv}
+    >
       {children}
     </StyledStoredConv>
   );

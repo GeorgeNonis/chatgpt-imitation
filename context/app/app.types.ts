@@ -17,6 +17,7 @@ export interface AppContextI {
   conversation: ConversationI;
   loading: boolean;
   storedConvs: ConversationI[];
+  currentConv: string;
   setTyping: Dispatch<SetStateAction<boolean>>;
   stopTyping: () => void;
   setConversation: Dispatch<SetStateAction<ConversationI>>;
