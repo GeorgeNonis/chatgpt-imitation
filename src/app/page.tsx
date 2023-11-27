@@ -15,21 +15,16 @@ import {
   StyledSideBar,
 } from "../styles/page.styles";
 import { useAppContext } from "../../context/app";
-import StoredConversation from "@/components/stored-conv/comps/conv";
 
 const Home = () => {
   const { conversation } = useAppContext();
-  const isThereConv = conversation.length > 0;
+  const isThereConv = conversation.conversation.length > 0;
 
   return (
     <StyledMain>
       <StyledSideBar>
         <NewConversation />
-        <StoredConversations>
-          <StoredConversation>
-            Giorgos Nonissssssssssssssssssssssssss
-          </StoredConversation>
-        </StoredConversations>
+        <StoredConversations />
       </StyledSideBar>
       <StyledChatGptchat emptyChat={!isThereConv}>
         <Header />

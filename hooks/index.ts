@@ -11,17 +11,24 @@ export const useService = () => {
     const loadingDummyId = uuidv4();
 
     setConversation((prevState) => {
-      return [...prevState, { from: "You", message: value, id: uuidv4() }];
+      const conv = prevState.conversation;
+      return {
+        ...prevState,
+        conversation: [...conv, { from: "You", message: value, id: uuidv4() }],
+      };
     });
 
     setLoading(true);
 
     // Add a dummy object in the array which then will be removed or replaced with actuall message
     setConversation((prevState) => {
-      return [
+      return {
         ...prevState,
-        { from: "MeowGPT", message: "Loading", id: loadingDummyId },
-      ];
+        conversation: [
+          ...prevState.conversation,
+          { from: "MeowGPT", message: "Loading", id: loadingDummyId },
+        ],
+      };
     });
 
     try {
@@ -29,13 +36,13 @@ export const useService = () => {
       const message = await sendQuestion({ value });
 
       setConversation((prevState) => {
-        const replaceDummy = prevState.map((c) => {
+        const replaceDummy = prevState.conversation.map((c) => {
           if (c.id === loadingDummyId) {
             return { ...c, message: message };
           }
           return c;
         });
-        return [...replaceDummy];
+        return { ...prevState, conversation: [...replaceDummy] };
       });
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
@@ -50,9 +57,11 @@ export const useService = () => {
       }
       // Take of the dummy "state" in case an error
       setConversation((prevState) => {
-        const removeDummy = prevState.filter((c) => c.id !== loadingDummyId);
+        const removeDummy = prevState.conversation.filter(
+          (c) => c.id !== loadingDummyId
+        );
 
-        return [...removeDummy];
+        return { ...prevState, conversation: [...removeDummy] };
       });
       console.error("Error with OpenAI API:", error);
     }
