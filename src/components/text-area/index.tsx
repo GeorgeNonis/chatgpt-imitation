@@ -3,7 +3,11 @@ import { ArrowUp, ToolTip } from "..";
 import { useTextArea } from "./useTextArea";
 import { TextAreaI } from "./text-area.types";
 
-const TextArea = ({ sendQuestionHandler, isLoading }: TextAreaI) => {
+const TextArea = ({
+  sendQuestionHandler,
+  isLoading,
+  "data-testid": datatestid,
+}: TextAreaI) => {
   const { onSumbitHandler, onChangeHandler, setValue, valid, value } =
     useTextArea({ sendQuestionHandler });
   return (
@@ -31,6 +35,7 @@ const TextArea = ({ sendQuestionHandler, isLoading }: TextAreaI) => {
             theme="white"
             css={{ height: 20, width: 20 }}
             isValid={valid && !isLoading}
+            data-testid={datatestid}
           />
         </ToolTip>
       </StyledTextArea>
