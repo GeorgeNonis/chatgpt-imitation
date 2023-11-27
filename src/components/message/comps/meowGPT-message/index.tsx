@@ -4,18 +4,17 @@ import { useAppContext } from "../../../../../context/app";
 import { useState } from "react";
 
 const MeowGPT = ({ message, id }: MeowGPTI) => {
-  const { typewriterRef, setTyping, printStatusHandler, setCurrentMsgId } =
+  const { typewriterRef, setTyping, messageStatusHandler, setCurrentMsgId } =
     useAppContext();
   return (
     <Typewriter
       onInit={(typewriter) => {
         typewriterRef.current = typewriter;
         setTyping(true);
-        setCurrentMsgId(id);
         typewriter
           .typeString(message)
           .callFunction(() => {
-            printStatusHandler();
+            messageStatusHandler();
             setTyping(false);
           })
           .start();

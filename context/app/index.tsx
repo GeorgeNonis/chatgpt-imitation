@@ -27,7 +27,7 @@ export const AppContextProvier = ({ children }: { children: ReactNode }) => {
       typewriterRef.current.stop();
       setTyping(false);
       toast.success("Stoped Typing");
-      printStatusHandler();
+      messageStatusHandler();
     }
   };
 
@@ -41,11 +41,12 @@ export const AppContextProvier = ({ children }: { children: ReactNode }) => {
   };
 
   const newConversation = () => {
+    // If theres no msgs then no ready to do anything
     if (conversation.conversation.length === 0) return;
     const convId = conversation?.id;
 
     const doesItExist = storedConvs.some((conv) => conv.id === convId);
-
+    // If it exists to updated the old state ofthe conversation
     if (doesItExist) {
       setStoredConvs((prevState) => {
         const updatedState = prevState.map((conv) => {
@@ -59,16 +60,18 @@ export const AppContextProvier = ({ children }: { children: ReactNode }) => {
     } else {
       setStoredConvs((prevState) => [...prevState, { ...conversation }]);
     }
+    // Otherwise just stored it and create new one
     const generatenewId = uuidv4();
     setCurrentConv(generatenewId);
     setConversation({ id: generatenewId, conversation: [] });
   };
 
-  const printStatusHandler = () => {
+  const messageStatusHandler = () => {
+    // This handler toggles the [isPrinted] to true - thats why the currentMsgId is needed
     setConversation((prevState) => {
       const updatedState = prevState.conversation.map((msg) => {
         if (msg.id === currentMsgId) {
-          return { ...msg, printerAlready: true };
+          return { ...msg, isPrinted: true };
         }
         return msg;
       });
@@ -93,7 +96,7 @@ export const AppContextProvier = ({ children }: { children: ReactNode }) => {
         stopTyping,
         newConversation,
         selectConversation,
-        printStatusHandler,
+        messageStatusHandler,
       }}
     >
       {children}

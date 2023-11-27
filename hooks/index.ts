@@ -5,7 +5,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 
 export const useService = () => {
-  const { setConversation, setLoading } = useAppContext();
+  const { setConversation, setLoading, setCurrentMsgId } = useAppContext();
 
   const sendQuestionHandler = async ({ value }: { value: string }) => {
     const loadingDummyId = uuidv4();
@@ -16,7 +16,7 @@ export const useService = () => {
         ...prevState,
         conversation: [
           ...conv,
-          { from: "You", message: value, id: uuidv4(), printerAlready: false },
+          { from: "You", message: value, id: uuidv4(), isPrinted: false },
         ],
       };
     });
@@ -33,7 +33,7 @@ export const useService = () => {
             from: "MeowGPT",
             message: "Loading",
             id: loadingDummyId,
-            printerAlready: false,
+            isPrinted: false,
           },
         ],
       };
@@ -52,6 +52,7 @@ export const useService = () => {
         });
         return { ...prevState, conversation: [...replaceDummy] };
       });
+      setCurrentMsgId(loadingDummyId);
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
         const statusCode = error.response.status;

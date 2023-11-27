@@ -5,7 +5,7 @@ export interface ConvI {
   from: User;
   message: string;
   id: string;
-  printerAlready: boolean;
+  isPrinted: boolean;
 }
 export interface ConversationI {
   id: string;
@@ -27,5 +27,5 @@ export interface AppContextI {
   stopTyping: () => void;
   newConversation: () => void;
   selectConversation: ({ id }: { id: string }) => void;
-  printStatusHandler: () => void;
+  messageStatusHandler: () => void;
 }
