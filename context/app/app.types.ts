@@ -20,11 +20,12 @@ export interface AppContextI {
   storedConvs: ConversationI[];
   currentConv: string;
   setTyping: Dispatch<SetStateAction<boolean>>;
-  stopTyping: () => void;
   setConversation: Dispatch<SetStateAction<ConversationI>>;
   setLoading: Dispatch<SetStateAction<boolean>>;
-  newConversation: () => void;
+  setCurrentMsgId: Dispatch<SetStateAction<string>>;
   setStoredConvs: Dispatch<SetStateAction<ConversationI[]>>;
+  stopTyping: () => void;
+  newConversation: () => void;
   selectConversation: ({ id }: { id: string }) => void;
-  printStatusHandler: (id: string) => void;
+  printStatusHandler: () => void;
 }

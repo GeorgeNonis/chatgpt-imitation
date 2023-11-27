@@ -12,6 +12,9 @@ export const AppContextProvier = ({ children }: { children: ReactNode }) => {
   const [typing, setTyping] = useState(false);
   const [storedConvs, setStoredConvs] = useState<ConversationI[]>([]);
   const [currentConv, setCurrentConv] = useState<ConversationI["id"]>(uuidv4());
+  const [currentMsgId, setCurrentMsgId] = useState<ConversationI["id"]>(
+    uuidv4()
+  );
   const [conversation, setConversation] = useState<ConversationI>({
     id: currentConv,
     conversation: [],
@@ -24,6 +27,7 @@ export const AppContextProvier = ({ children }: { children: ReactNode }) => {
       typewriterRef.current.stop();
       setTyping(false);
       toast.success("Stoped Typing");
+      printStatusHandler();
     }
   };
 
@@ -60,10 +64,10 @@ export const AppContextProvier = ({ children }: { children: ReactNode }) => {
     setConversation({ id: generatenewId, conversation: [] });
   };
 
-  const printStatusHandler = (id: string) => {
+  const printStatusHandler = () => {
     setConversation((prevState) => {
       const updatedState = prevState.conversation.map((msg) => {
-        if (msg.id === id) {
+        if (msg.id === currentMsgId) {
           return { ...msg, printerAlready: true };
         }
         return msg;
@@ -82,11 +86,12 @@ export const AppContextProvier = ({ children }: { children: ReactNode }) => {
         storedConvs,
         currentConv,
         setLoading,
+        setCurrentMsgId,
         setConversation,
         setTyping,
+        setStoredConvs,
         stopTyping,
         newConversation,
-        setStoredConvs,
         selectConversation,
         printStatusHandler,
       }}
