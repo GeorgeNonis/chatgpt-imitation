@@ -5,7 +5,7 @@ import Copy from ".";
 
 describe("Copy", () => {
   it("renders the copy icon and responds to click events", () => {
-    const testId = "copy-test"; // Update this to match the data-testid in your component
+    const testId = "copy-test";
     const mockOnClick = jest.fn();
     render(<Copy onClick={mockOnClick} />);
 
