@@ -1,8 +1,11 @@
-import { UserI } from "../ui/user/user.types";
+import { ConvI } from "../../../context/app/app.types";
+
 export type User = "You" | "MeowGPT";
 
 export type ChatI = {
-  user: User;
-  message: string;
   canCopy: boolean;
-} & UserI;
+} & ConvI;
+
+export interface UseChatI {
+  message: string;
+}

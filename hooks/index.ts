@@ -14,7 +14,10 @@ export const useService = () => {
       const conv = prevState.conversation;
       return {
         ...prevState,
-        conversation: [...conv, { from: "You", message: value, id: uuidv4() }],
+        conversation: [
+          ...conv,
+          { from: "You", message: value, id: uuidv4(), printerAlready: false },
+        ],
       };
     });
 
@@ -26,7 +29,12 @@ export const useService = () => {
         ...prevState,
         conversation: [
           ...prevState.conversation,
-          { from: "MeowGPT", message: "Loading", id: loadingDummyId },
+          {
+            from: "MeowGPT",
+            message: "Loading",
+            id: loadingDummyId,
+            printerAlready: false,
+          },
         ],
       };
     });

@@ -12,29 +12,25 @@ import { useChat } from "./useChat";
 import ReactLoading from "react-loading";
 import { Copy, MeowGPT, UserMessage } from "./comps";
 
-const Message = ({ user, message, canCopy, ...props }: ChatI) => {
-  const { copyToClipboard, setTyping, typewriterRef } = useChat({
-    message,
-  });
-
+const Message = ({ canCopy, ...props }: ChatI) => {
+  const { message, from, printerAlready } = props;
+  const { copyToClipboard } = useChat({ message });
   const onGoingRequest = message === "Loading";
-  const meowGPT = user === "MeowGPT";
+  const meowGPT = from === "MeowGPT";
 
   return (
     <StyledChatWrapper>
       <StyledChat>
-        <User user={user} {...props} />
+        <User user={from} />
         <StyledTextWrapper>
-          <StyledText>{user}</StyledText>
+          <StyledText>{from}</StyledText>
           <StyledTypeWriterWrapper>
             {onGoingRequest ? (
               <ReactLoading type={"bubbles"} color={"gray"} />
+            ) : printerAlready ? (
+              <UserMessage>{message}</UserMessage>
             ) : meowGPT ? (
-              <MeowGPT
-                message={message}
-                setTyping={setTyping}
-                typewriterRef={typewriterRef}
-              />
+              <MeowGPT {...props} />
             ) : (
               <UserMessage>{message}</UserMessage>
             )}

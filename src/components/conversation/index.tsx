@@ -13,14 +13,12 @@ const Conversation = () => {
     scrollToBottom,
   } = useConversation();
 
-  console.log({ conversation });
   const conv = conversation.conversation.map((inf, i) => {
     const lastIndex = conversation.conversation.length - 1;
     return (
       <Message
+        {...inf}
         key={i}
-        user={inf.from}
-        message={inf.message}
         canCopy={
           conversation.conversation[lastIndex].message === inf.message && typing
         }

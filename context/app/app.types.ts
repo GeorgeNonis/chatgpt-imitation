@@ -5,6 +5,7 @@ export interface ConvI {
   from: User;
   message: string;
   id: string;
+  printerAlready: boolean;
 }
 export interface ConversationI {
   id: string;
@@ -25,4 +26,5 @@ export interface AppContextI {
   newConversation: () => void;
   setStoredConvs: Dispatch<SetStateAction<ConversationI[]>>;
   selectConversation: ({ id }: { id: string }) => void;
+  printStatusHandler: (id: string) => void;
 }

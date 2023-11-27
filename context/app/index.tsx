@@ -60,6 +60,18 @@ export const AppContextProvier = ({ children }: { children: ReactNode }) => {
     setConversation({ id: generatenewId, conversation: [] });
   };
 
+  const printStatusHandler = (id: string) => {
+    setConversation((prevState) => {
+      const updatedState = prevState.conversation.map((msg) => {
+        if (msg.id === id) {
+          return { ...msg, printerAlready: true };
+        }
+        return msg;
+      });
+      return { ...prevState, conversation: [...updatedState] };
+    });
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -76,6 +88,7 @@ export const AppContextProvier = ({ children }: { children: ReactNode }) => {
         newConversation,
         setStoredConvs,
         selectConversation,
+        printStatusHandler,
       }}
     >
       {children}
