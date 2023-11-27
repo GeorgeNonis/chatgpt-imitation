@@ -16,6 +16,7 @@ const NewConversation = () => {
           justifySelf: "flex-end",
         }}
         stroke="red"
+        data-testid="faPenToSquare"
       />
     </StyledNewConversation>
   );
