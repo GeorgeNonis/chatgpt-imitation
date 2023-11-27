@@ -6,13 +6,22 @@ export const StyledNewConversation = styled("div", {
   gap: 5,
   color: "white",
   placeItems: "center",
-  cursor: "pointer",
   padding: 5,
   borderRadius: 10,
   transition: "all .1s ease-in-out",
 
-  "&:hover": {
-    backgroundColor: "rgb(128 128 128 / 19%)",
+  variants: {
+    loading: {
+      true: {
+        cursor: "unset",
+      },
+      false: {
+        "&:hover": {
+          backgroundColor: "rgb(128 128 128 / 19%)",
+        },
+        cursor: "pointer",
+      },
+    },
   },
 });
 

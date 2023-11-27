@@ -1,17 +1,10 @@
 import { StyledInput, StyledTextArea, StyledWarning } from "./text-area.styles";
-import { ArrowUp, StopButton, ToolTip } from "..";
+import { ArrowUp, ToolTip } from "..";
 import { useTextArea } from "./useTextArea";
 
 const TextArea = () => {
-  const {
-    textAreaHandler,
-    submitHandler,
-    stopTyping,
-    setValue,
-    valid,
-    isLoading,
-    value,
-  } = useTextArea();
+  const { textAreaHandler, submitHandler, setValue, valid, isLoading, value } =
+    useTextArea();
   return (
     <>
       <StyledTextArea>
@@ -31,18 +24,14 @@ const TextArea = () => {
           placeholder="Message me 😶‍🌫️..."
           onChange={textAreaHandler}
         />
-        {!isLoading ? (
-          <ToolTip off={10} tooltip="Send Message">
-            <ArrowUp
-              onClick={submitHandler}
-              theme="white"
-              css={{ height: 20, width: 20 }}
-              isValid={valid}
-            />
-          </ToolTip>
-        ) : (
-          <StopButton onClick={stopTyping} />
-        )}
+        <ToolTip off={10} tooltip="Send Message">
+          <ArrowUp
+            onClick={!isLoading ? submitHandler : () => null}
+            theme="white"
+            css={{ height: 20, width: 20 }}
+            isValid={valid && !isLoading}
+          />
+        </ToolTip>
       </StyledTextArea>
       <StyledWarning>
         MeowGPT can make mistakes. Consider checking important information.

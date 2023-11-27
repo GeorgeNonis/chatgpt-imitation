@@ -3,7 +3,7 @@ import { useAppContext } from "../../../context/app";
 import { useService } from "../../../hooks";
 
 export const useTextArea = () => {
-  const { stopTyping, typing, loading } = useAppContext();
+  const { typing, loading } = useAppContext();
   const [value, setValue] = useState("");
   const [valid, setValid] = useState(false);
   const { sendQuestionHandler } = useService();
@@ -30,7 +30,6 @@ export const useTextArea = () => {
   return {
     textAreaHandler,
     submitHandler,
-    stopTyping,
     setValue,
     valid,
     isLoading,

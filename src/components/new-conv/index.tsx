@@ -5,9 +5,12 @@ import Image from "next/image";
 import { useAppContext } from "../../../context/app";
 
 const NewConversation = () => {
-  const { newConversation } = useAppContext();
+  const { newConversation, loading, typing } = useAppContext();
   return (
-    <StyledNewConversation onClick={newConversation}>
+    <StyledNewConversation
+      onClick={!loading || !typing ? newConversation : () => null}
+      loading={loading || typing}
+    >
       <Image src={"/cat.png"} height={30} width={30} alt="MeowGPT" />
       <StyledText>MeoewGPT</StyledText>{" "}
       <FontAwesomeIcon

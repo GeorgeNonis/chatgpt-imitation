@@ -24,7 +24,6 @@ export interface AppContextI {
   setLoading: Dispatch<SetStateAction<boolean>>;
   setCurrentMsgId: Dispatch<SetStateAction<string>>;
   setStoredConvs: Dispatch<SetStateAction<ConversationI[]>>;
-  stopTyping: () => void;
   newConversation: () => void;
   selectConversation: ({ id }: { id: string }) => void;
   messageStatusHandler: () => void;

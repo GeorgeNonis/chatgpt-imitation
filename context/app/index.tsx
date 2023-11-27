@@ -1,7 +1,6 @@
 "use client";
 
 import { ReactNode, createContext, useContext, useRef, useState } from "react";
-import toast from "react-hot-toast";
 import { AppContextI, ConversationI } from "./app.types";
 import { v4 as uuidv4 } from "uuid";
 
@@ -22,16 +21,8 @@ export const AppContextProvier = ({ children }: { children: ReactNode }) => {
 
   const typewriterRef = useRef<any>(null);
 
-  const stopTyping = () => {
-    if (typewriterRef.current) {
-      typewriterRef.current.stop();
-      setTyping(false);
-      toast.success("Stoped Typing");
-      messageStatusHandler();
-    }
-  };
-
   const selectConversation = ({ id }: { id: string }) => {
+    // If its already in the current conv just return
     if (currentConv === id) return;
     const findConv = storedConvs.find((conv) => conv.id === id);
     if (findConv?.conversation) {
@@ -93,7 +84,6 @@ export const AppContextProvier = ({ children }: { children: ReactNode }) => {
         setConversation,
         setTyping,
         setStoredConvs,
-        stopTyping,
         newConversation,
         selectConversation,
         messageStatusHandler,

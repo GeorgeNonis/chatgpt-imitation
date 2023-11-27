@@ -4,7 +4,6 @@ export const StyledStoredConv = styled("div", {
   position: "relative",
   textAlign: "center",
   color: "white",
-  cursor: "pointer",
   padding: 10,
   borderRadius: 10,
   fontSize: ".9rem",
@@ -14,14 +13,22 @@ export const StyledStoredConv = styled("div", {
   overflow: "hidden",
 
   transition: "all .1s ease-in-out",
-  "&:hover": {
-    backgroundColor: "rgb(128 128 128 / 19%)",
-  },
 
   variants: {
     selected: {
       true: {
         backgroundColor: "rgb(128 128 128 / 19%)",
+      },
+    },
+    loading: {
+      true: {
+        cursor: "unset",
+      },
+      false: {
+        "&:hover": {
+          backgroundColor: "rgb(128 128 128 / 19%)",
+        },
+        cursor: "pointer",
       },
     },
   },

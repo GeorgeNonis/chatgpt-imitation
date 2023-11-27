@@ -1,18 +1,17 @@
-import { ReactNode } from "react";
 import { StyledStoredConv } from "./conv.styles";
 import { useAppContext } from "../../../../../context/app";
-
-export interface StoredConversationI {
-  children: ReactNode;
-  id: string;
-}
+import { StoredConversationI } from "./conv.types";
 
 const StoredConversation = ({ children, id }: StoredConversationI) => {
-  const { selectConversation, currentConv } = useAppContext();
+  const { selectConversation, currentConv, loading, typing } = useAppContext();
+
   return (
     <StyledStoredConv
-      onClick={() => selectConversation({ id })}
+      onClick={
+        loading || typing ? () => null : () => selectConversation({ id })
+      }
       selected={id === currentConv}
+      loading={loading || typing}
     >
       {children}
     </StyledStoredConv>
