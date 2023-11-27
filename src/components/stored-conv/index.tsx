@@ -1,7 +1,7 @@
 import { StyledStoredConversation } from "./stored-conv.styles";
 import { StoredConversationI } from "./stored-conv.types";
 
-const StoredConversation = ({ children }: StoredConversationI) => {
+const StoredConversations = ({ children }: StoredConversationI) => {
   return <StyledStoredConversation>{children}</StyledStoredConversation>;
 };
-export default StoredConversation;
+export default StoredConversations;

@@ -1,5 +1,5 @@
 export { default as NewConversation } from "./new-conv";
-export { default as StoredConversation } from "./stored-conv";
+export { default as StoredConversations } from "./stored-conv";
 export { default as Header } from "./header";
 export { default as Conversation } from "./conversation";
 export { default as User } from "./ui/user";

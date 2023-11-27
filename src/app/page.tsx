@@ -7,6 +7,7 @@ import {
   Conversation,
   Header,
   NewConversation,
+  StoredConversations,
 } from "@/components";
 import {
   StyledChatGptchat,
@@ -14,6 +15,7 @@ import {
   StyledSideBar,
 } from "../styles/page.styles";
 import { useAppContext } from "../../context/app";
+import StoredConversation from "@/components/stored-conv/comps/conv";
 
 const Home = () => {
   const { conversation } = useAppContext();
@@ -23,6 +25,11 @@ const Home = () => {
     <StyledMain>
       <StyledSideBar>
         <NewConversation />
+        <StoredConversations>
+          <StoredConversation>
+            Giorgos Nonissssssssssssssssssssssssss
+          </StoredConversation>
+        </StoredConversations>
       </StyledSideBar>
       <StyledChatGptchat emptyChat={!isThereConv}>
         <Header />

@@ -1,15 +1,26 @@
 "use client";
 
-import { ReactNode, createContext, useContext, useRef, useState } from "react";
+import {
+  ReactNode,
+  createContext,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import toast from "react-hot-toast";
-import { AppContextI, ConversationI } from "./app.types";
+import { AppContextI, ConversationI, ConversationsI } from "./app.types";
 
 export const AppContext = createContext<AppContextI | null>(null);
 
 export const AppContextProvier = ({ children }: { children: ReactNode }) => {
   const [loading, setLoading] = useState(false);
   const [typing, setTyping] = useState(false);
-  const [storedConvs, setStoredConvs] = useState<ConversationI[][]>([]);
+  const [storedConvs, setStoredConvs] = useState<ConversationsI[]>([
+    { id: "1995", conversation: [] },
+  ]);
+  const [currentConversation, setCurrentConversation] =
+    useState<ConversationsI["id"]>("1995");
   const [conversation, setConversation] = useState<ConversationI[]>([]);
 
   const typewriterRef = useRef<any>(null);
@@ -21,6 +32,10 @@ export const AppContextProvier = ({ children }: { children: ReactNode }) => {
       toast.success("Stoped Typing");
     }
   };
+
+  // useEffect(() => {
+  //   setStoredConvs([{ id: "1995", conversation: [] }]);
+  // }, []);
 
   return (
     <AppContext.Provider

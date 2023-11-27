@@ -7,6 +7,11 @@ export interface ConversationI {
   id: string;
 }
 
+export interface ConversationsI {
+  id: string;
+  conversation: ConversationI[];
+}
+
 export interface AppContextI {
   typewriterRef: MutableRefObject<any>;
   typing: boolean;
