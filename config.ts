@@ -1,7 +1,6 @@
 import { IdeaProposal } from "./types";
-import { shuffle } from "./utils";
 
-export const IDEAS: IdeaProposal[] = shuffle([
+export const IDEAS: IdeaProposal[] = [
   { title: "Give me ideas", idea: `for what to do with my kids' art` },
   {
     title: "Brainstorm incentives",
@@ -41,11 +40,26 @@ export const IDEAS: IdeaProposal[] = shuffle([
     title: "Propose activities",
     idea: "for a family reunion with all age groups",
   },
-]);
+];
 
 export const STORE_CONVS = [
   "How to learn Coding",
   "How to be a developer",
   "Tzatziki",
   "Gyros",
+];
+
+export const errorStatuses = [
+  { status: 400, message: "Bad request. Please check your input." },
+  {
+    status: 401,
+    message: "You are not authorized. Please check your credentials.",
+  },
+  {
+    status: 403,
+    message: "Access forbidden. You don't have permission to access this.",
+  },
+  { status: 404, message: "Resource not found." },
+  { status: 429, message: "You are only allowed 3 messages every 1 minute." },
+  { status: 500, message: "Internal Server Error. Please try again later." },
 ];
