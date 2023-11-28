@@ -5,7 +5,7 @@ import { faArrowCircleDown } from "@fortawesome/free-solid-svg-icons";
 import { useConversation } from "./useConversation";
 import { ConversationIn } from "./conversation.types";
 
-const Conversation = ({ conversation, typing, setTyping }: ConversationIn) => {
+const Conversation = ({ conversation, typing }: ConversationIn) => {
   const { showScrollDownArrow, containerRef, scrollToBottom } =
     useConversation();
 
@@ -14,7 +14,6 @@ const Conversation = ({ conversation, typing, setTyping }: ConversationIn) => {
     return (
       <Message
         {...inf}
-        setTyping={setTyping}
         key={i}
         canCopy={
           conversation.conversation[lastIndex].message === inf.message && typing

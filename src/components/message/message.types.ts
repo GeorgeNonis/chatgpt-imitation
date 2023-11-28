@@ -5,7 +5,6 @@ export type User = "You" | "MeowGPT";
 
 export type ChatI = {
   canCopy: boolean;
-  setTyping: Dispatch<SetStateAction<boolean>>;
 } & ConvI;
 
 export interface UseChatI {

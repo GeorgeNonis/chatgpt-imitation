@@ -1,7 +1,9 @@
 import Typewriter from "typewriter-effect";
 import { MeowGPTI } from "./meowGPT-message.types";
+import { useAppContext } from "../../../../../hooks/app";
 
-const MeowGPT = ({ message, setTyping }: MeowGPTI) => {
+const MeowGPT = ({ message }: MeowGPTI) => {
+  const { setTyping } = useAppContext();
   return (
     <Typewriter
       onInit={(typewriter) => {

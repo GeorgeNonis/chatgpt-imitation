@@ -1,7 +1,8 @@
 import { ChangeEvent, useEffect, useState } from "react";
-import { UseTextAreaI } from "./text-area.types";
+import { useAppContext } from "../../../hooks/app";
 
-export const useTextArea = ({ sendQuestionHandler }: UseTextAreaI) => {
+export const useTextArea = () => {
+  const { sendQuestionHandler, isLoading } = useAppContext();
   const [value, setValue] = useState("");
   const [valid, setValid] = useState(false);
 
@@ -28,5 +29,6 @@ export const useTextArea = ({ sendQuestionHandler }: UseTextAreaI) => {
     setValue,
     valid,
     value,
+    isLoading,
   };
 };
