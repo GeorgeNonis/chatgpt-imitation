@@ -9,14 +9,14 @@ const Conversation = ({ conversation, typing }: ConversationIn) => {
   const { showScrollDownArrow, containerRef, scrollToBottom } =
     useConversation();
 
-  const conv = conversation.conversation.map((inf, i) => {
-    const lastIndex = conversation.conversation.length - 1;
+  const conv = conversation.messages.map((inf, i) => {
+    const lastIndex = conversation.messages.length - 1;
     return (
       <Message
         {...inf}
         key={i}
         canCopy={
-          conversation.conversation[lastIndex].message === inf.message && typing
+          conversation.messages[lastIndex].message === inf.message && typing
         }
       />
     );
@@ -26,6 +26,7 @@ const Conversation = ({ conversation, typing }: ConversationIn) => {
       {conv}
       <FontAwesomeIcon
         icon={faArrowCircleDown}
+        data-testid="faArrowCircleDown"
         style={{
           position: "sticky",
           cursor: "pointer",

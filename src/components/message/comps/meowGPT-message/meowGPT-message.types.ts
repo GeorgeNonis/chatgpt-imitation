@@ -1,4 +1,4 @@
-import { ConvI } from "../../../../../hooks/app/app.types";
+import { ConvI } from "../../../../../context/app/app.types";
 
 export interface MeowGPTI {
   message: ConvI["message"];

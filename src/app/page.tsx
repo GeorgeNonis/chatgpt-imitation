@@ -14,11 +14,11 @@ import {
   StyledMain,
   StyledSideBar,
 } from "../styles/page.styles";
-import { useAppContext } from "../../hooks/app";
+import { useAppContext } from "../../context/app";
 
 const Home = () => {
   const { conversation, typing } = useAppContext();
-  const isThereConv = conversation.conversation.length > 0;
+  const isThereConv = conversation.messages.length > 0;
 
   return (
     <StyledMain>

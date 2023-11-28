@@ -8,7 +8,7 @@ export interface ConvI {
 }
 export interface ConversationI {
   id: string;
-  conversation: ConvI[] | [];
+  messages: ConvI[] | [];
 }
 
 export interface AppContextI {

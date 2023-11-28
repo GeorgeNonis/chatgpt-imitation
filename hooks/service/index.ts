@@ -9,10 +9,10 @@ export const useService = ({ setConversation, setLoading }: UseServiceI) => {
     const loadingDummyId = uuidv4();
 
     setConversation((prevState) => {
-      const conv = prevState.conversation;
+      const conv = prevState.messages;
       return {
         ...prevState,
-        conversation: [
+        messages: [
           ...conv,
           { from: "You", message: value, id: uuidv4(), isPrinted: false },
         ],
@@ -25,8 +25,8 @@ export const useService = ({ setConversation, setLoading }: UseServiceI) => {
     setConversation((prevState) => {
       return {
         ...prevState,
-        conversation: [
-          ...prevState.conversation,
+        messages: [
+          ...prevState.messages,
           {
             from: "MeowGPT",
             message: "Loading",
@@ -43,13 +43,13 @@ export const useService = ({ setConversation, setLoading }: UseServiceI) => {
 
       // Replace the dummy state with the actuall message from the response
       setConversation((prevState) => {
-        const replaceDummy = prevState.conversation.map((c) => {
+        const replaceDummy = prevState.messages.map((c) => {
           if (c.id === loadingDummyId) {
             return { ...c, message: message };
           }
           return c;
         });
-        return { ...prevState, conversation: [...replaceDummy] };
+        return { ...prevState, messages: [...replaceDummy] };
       });
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
@@ -64,11 +64,11 @@ export const useService = ({ setConversation, setLoading }: UseServiceI) => {
       }
       // Take of the dummy "state" off in case an error
       setConversation((prevState) => {
-        const removeDummy = prevState.conversation.filter(
+        const removeDummy = prevState.messages.filter(
           (c) => c.id !== loadingDummyId
         );
 
-        return { ...prevState, conversation: [...removeDummy] };
+        return { ...prevState, messages: [...removeDummy] };
       });
       console.error("Error with OpenAI API:", error);
     }

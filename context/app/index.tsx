@@ -9,7 +9,7 @@ import {
   useState,
 } from "react";
 import { ConversationI } from "./app.types";
-import { useService } from "../service";
+import { useService } from "../../hooks";
 
 export interface AppContextI {
   loading: boolean;
@@ -29,7 +29,7 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
   const [typing, setTyping] = useState(false);
   const [conversation, setConversation] = useState<ConversationI>({
     id: "1995",
-    conversation: [],
+    messages: [],
   });
 
   const isLoading = loading || typing;

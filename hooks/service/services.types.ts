@@ -1,4 +1,4 @@
-import { ConversationI } from "../app/app.types";
+import { ConversationI } from "../../context/app/app.types";
 import { Dispatch, SetStateAction } from "react";
 
 export interface UseServiceI {

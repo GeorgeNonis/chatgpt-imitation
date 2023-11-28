@@ -1,5 +1,5 @@
 import { ChangeEvent, useEffect, useState } from "react";
-import { useAppContext } from "../../../hooks/app";
+import { useAppContext } from "../../../context";
 
 export const useTextArea = () => {
   const { sendQuestionHandler, isLoading } = useAppContext();
