@@ -19,6 +19,4 @@ describe("Copy", () => {
     // Check if the onClick function was called
     expect(mockOnClick).toHaveBeenCalled();
   });
-
-  // Add additional tests if necessary
 });
