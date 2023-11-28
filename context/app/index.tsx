@@ -1,37 +1,52 @@
 "use client";
 
-import { ReactNode, createContext, useContext, useRef, useState } from "react";
-import toast from "react-hot-toast";
-import { AppContextI, ConversationI } from "./app.types";
+import {
+  Dispatch,
+  ReactNode,
+  SetStateAction,
+  createContext,
+  useContext,
+  useState,
+} from "react";
+import { ConversationI } from "./app.types";
+import { useService } from "../../hooks";
+
+export interface AppContextI {
+  loading: boolean;
+  typing: boolean;
+  isLoading: boolean;
+  conversation: ConversationI;
+  setConversation: Dispatch<SetStateAction<ConversationI>>;
+  setLoading: Dispatch<SetStateAction<boolean>>;
+  setTyping: Dispatch<SetStateAction<boolean>>;
+  sendQuestionHandler: ({ value }: { value: string }) => Promise<void>;
+}
 
 export const AppContext = createContext<AppContextI | null>(null);
 
-export const AppContextProvier = ({ children }: { children: ReactNode }) => {
+export const AppContextProvider = ({ children }: { children: ReactNode }) => {
   const [loading, setLoading] = useState(false);
   const [typing, setTyping] = useState(false);
-  const [conversation, setConversation] = useState<ConversationI[]>([]);
+  const [conversation, setConversation] = useState<ConversationI>({
+    id: "1995",
+    messages: [],
+  });
 
-  const typewriterRef = useRef<any>(null);
+  const isLoading = loading || typing;
 
-  const stopTyping = () => {
-    if (typewriterRef.current) {
-      typewriterRef.current.stop();
-      setTyping(false);
-      toast.success("Stoped Typing");
-    }
-  };
+  const { sendQuestionHandler } = useService({ setConversation, setLoading });
 
   return (
     <AppContext.Provider
       value={{
-        typewriterRef,
-        typing,
         conversation,
         loading,
-        setLoading,
+        typing,
+        isLoading,
+        sendQuestionHandler,
         setConversation,
+        setLoading,
         setTyping,
-        stopTyping,
       }}
     >
       {children}
@@ -39,7 +54,6 @@ export const AppContextProvier = ({ children }: { children: ReactNode }) => {
   );
 };
 
-// Context Guard
 export const useAppContext = () => {
   const context = useContext(AppContext);
   if (context === null) {

@@ -4,11 +4,13 @@ export const StyledMain = styled("main", {
   display: "grid",
   gridTemplateColumns: "1.5fr 10.5fr",
   height: "100vh",
-  backgroundColor: "red",
 });
 
 export const StyledSideBar = styled("div", {
+  display: "grid",
+  gridTemplateRows: ".5fr 11.5fr",
   backgroundColor: "rgba(0,0,0,1)",
+  padding: "20px 10px",
 });
 
 export const StyledChatGptchat = styled("div", {

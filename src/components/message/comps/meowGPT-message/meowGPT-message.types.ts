@@ -1,6 +1,5 @@
-import { MutableRefObject, SetStateAction } from "react";
+import { ConvI } from "../../../../../context/app/app.types";
+
 export interface MeowGPTI {
-  typewriterRef: MutableRefObject<any>;
-  setTyping: (value: SetStateAction<boolean>) => void;
-  message: string;
+  message: ConvI["message"];
 }

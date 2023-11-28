@@ -7,6 +7,7 @@ const ArrowUp = ({ theme = "dark", isValid, css, ...props }: ArrowUpI) => {
     return (
       <FontAwesomeIcon
         icon={faArrowUp}
+        data-testid="faArrowUp"
         style={{
           cursor: "pointer",
           padding: "4px",
@@ -24,6 +25,7 @@ const ArrowUp = ({ theme = "dark", isValid, css, ...props }: ArrowUpI) => {
     return (
       <FontAwesomeIcon
         icon={faArrowUp}
+        data-testid="faArrowUp"
         style={{
           cursor: "pointer",
           padding: "4px",

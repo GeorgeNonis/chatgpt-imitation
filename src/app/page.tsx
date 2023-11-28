@@ -1,6 +1,14 @@
 "use client";
 
-import { Intro, Proposals, TextArea, Conversation, Header } from "@/components";
+import {
+  Intro,
+  Proposals,
+  TextArea,
+  Conversation,
+  Header,
+  NewConversation,
+  StoredConversations,
+} from "@/components";
 import {
   StyledChatGptchat,
   StyledMain,
@@ -9,15 +17,22 @@ import {
 import { useAppContext } from "../../context/app";
 
 const Home = () => {
-  const { conversation } = useAppContext();
-  const isThereConv = conversation.length > 0;
+  const { conversation, typing } = useAppContext();
+  const isThereConv = conversation.messages.length > 0;
 
   return (
     <StyledMain>
-      <StyledSideBar>Sidebar</StyledSideBar>
+      <StyledSideBar>
+        <NewConversation />
+        <StoredConversations />
+      </StyledSideBar>
       <StyledChatGptchat emptyChat={!isThereConv}>
         <Header />
-        {isThereConv ? <Conversation /> : <Intro />}
+        {isThereConv ? (
+          <Conversation conversation={conversation} typing={typing} />
+        ) : (
+          <Intro />
+        )}
         {!isThereConv && <Proposals />}
         <TextArea />
       </StyledChatGptchat>

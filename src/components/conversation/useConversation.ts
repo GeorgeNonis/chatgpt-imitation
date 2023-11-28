@@ -1,9 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import { useAppContext } from "../../../context/app";
 
 export const useConversation = () => {
-  const { conversation, typing } = useAppContext();
-
   const containerRef = useRef<HTMLDivElement>(null);
   const [showScrollDownArrow, setShowScrollDownArrow] = useState(false);
 
@@ -43,10 +40,8 @@ export const useConversation = () => {
   }, []);
 
   return {
-    conversation,
     showScrollDownArrow,
     containerRef,
-    typing,
     scrollToBottom,
   };
 };

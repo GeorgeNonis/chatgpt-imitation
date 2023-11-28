@@ -1,8 +1,9 @@
 import toast from "react-hot-toast";
-import { useAppContext } from "../../../context/app";
+import { UseChatI } from "./message.types";
+import { useAppContext } from "../../../context";
 
-export const useChat = ({ message }: { message: string }) => {
-  const { typewriterRef, setTyping, typing } = useAppContext();
+export const useChat = ({ message }: UseChatI) => {
+  const { loading } = useAppContext();
   const copyToClipboard = async () => {
     try {
       await navigator.clipboard.writeText(message);
@@ -15,9 +16,7 @@ export const useChat = ({ message }: { message: string }) => {
   };
 
   return {
-    typewriterRef,
-    typing,
-    setTyping,
     copyToClipboard,
+    loading,
   };
 };
