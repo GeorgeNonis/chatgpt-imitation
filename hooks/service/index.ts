@@ -55,14 +55,38 @@ export const useService = ({ setConversation, setLoading }: UseServiceI) => {
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
         const statusCode = error.response.status;
-        if (statusCode === 429) {
-          toast.error("You are only allowed 3 messages every 1 minute");
-        } else {
-          toast.error("An error occurred");
+        switch (statusCode) {
+          case 400:
+            toast.error("Bad request. Please check your input.");
+            break;
+          case 401:
+            toast.error(
+              "You are not authorized. Please check your credentials."
+            );
+            break;
+          case 403:
+            toast.error(
+              "Access forbidden. You don't have permission to access this."
+            );
+            break;
+          case 404:
+            toast.error("Resource not found.");
+            break;
+          case 429:
+            toast.error("You are only allowed 3 messages every 1 minute.");
+            break;
+          case 500:
+            toast.error("Internal Server Error. Please try again later.");
+            break;
+          default:
+            toast.error("An unexpected error occurred. Please try again.");
         }
       } else {
-        toast.error("An unexpected error occurred");
+        toast.error(
+          "An unexpected error occurred. Please check your network connection."
+        );
       }
+
       // Take of the dummy "state" off in case an error
       setConversation((prevState) => {
         const removeDummy = prevState.messages.filter(
