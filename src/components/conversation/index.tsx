@@ -11,15 +11,8 @@ const Conversation = ({ conversation, typing }: ConversationIn) => {
 
   const conv = conversation.messages.map((inf, i) => {
     const lastIndex = conversation.messages.length - 1;
-    return (
-      <Message
-        {...inf}
-        key={i}
-        canCopy={
-          conversation.messages[lastIndex].message === inf.message && typing
-        }
-      />
-    );
+    const latestMsg = conversation.messages[lastIndex].message === inf.message;
+    return <Message {...inf} key={i} canCopy={latestMsg && typing} />;
   });
   return (
     <StyledConversation ref={containerRef}>

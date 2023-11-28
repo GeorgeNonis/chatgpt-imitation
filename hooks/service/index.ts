@@ -6,6 +6,7 @@ import { UseServiceI } from "./services.types";
 
 export const useService = ({ setConversation, setLoading }: UseServiceI) => {
   const sendQuestionHandler = async ({ value }: { value: string }) => {
+    // Dummy id will be used later to detect it and replace it with actuall data
     const loadingDummyId = uuidv4();
 
     setConversation((prevState) => {

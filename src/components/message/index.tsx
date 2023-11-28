@@ -14,9 +14,17 @@ import { Copy, MeowGPT, UserMessage } from "./comps";
 
 const Message = ({ canCopy, ...props }: ChatI) => {
   const { message, from } = props;
-  const { copyToClipboard } = useChat({ message });
+  const { copyToClipboard, loading } = useChat({ message });
   const onGoingRequest = message === "Loading";
   const meowGPT = from === "MeowGPT";
+
+  const typeOfChat = onGoingRequest ? (
+    <ReactLoading type={"bubbles"} color={"gray"} />
+  ) : meowGPT ? (
+    <MeowGPT {...props} />
+  ) : (
+    <UserMessage>{message}</UserMessage>
+  );
 
   return (
     <StyledChatWrapper>
@@ -24,15 +32,7 @@ const Message = ({ canCopy, ...props }: ChatI) => {
         <User user={from} />
         <StyledTextWrapper>
           <StyledText>{from}</StyledText>
-          <StyledTypeWriterWrapper>
-            {onGoingRequest ? (
-              <ReactLoading type={"bubbles"} color={"gray"} />
-            ) : meowGPT ? (
-              <MeowGPT {...props} />
-            ) : (
-              <UserMessage>{message}</UserMessage>
-            )}
-          </StyledTypeWriterWrapper>
+          <StyledTypeWriterWrapper>{typeOfChat}</StyledTypeWriterWrapper>
           {!canCopy && !onGoingRequest && <Copy onClick={copyToClipboard} />}
         </StyledTextWrapper>
       </StyledChat>
