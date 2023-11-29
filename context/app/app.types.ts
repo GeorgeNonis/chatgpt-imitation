@@ -11,12 +11,19 @@ export interface ConversationI {
   messages: ConvI[] | [];
 }
 
+export interface StopTypingI {
+  text: string;
+}
+
 export interface AppContextI {
-  typewriterRef: MutableRefObject<any>;
-  typing: boolean;
-  conversation: ConversationI;
   loading: boolean;
-  setTyping: Dispatch<SetStateAction<boolean>>;
+  typing: boolean;
+  isLoading: boolean;
+  conversation: ConversationI;
   setConversation: Dispatch<SetStateAction<ConversationI>>;
   setLoading: Dispatch<SetStateAction<boolean>>;
+  setTyping: Dispatch<SetStateAction<boolean>>;
+  sendQuestionHandler: ({ value }: { value: string }) => Promise<void>;
+  stopTypingHandler: ({ text }: StopTypingI) => void;
+  setCurrentMessageID: Dispatch<SetStateAction<string>>;
 }
