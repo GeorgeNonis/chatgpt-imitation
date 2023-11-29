@@ -1,5 +1,5 @@
 export interface UseTypewriterProps {
-  fullText: string;
+  message: string;
   // milliseconds
   typingSpeed?: number;
 }
