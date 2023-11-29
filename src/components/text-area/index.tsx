@@ -2,6 +2,8 @@ import { StyledInput, StyledTextArea, StyledWarning } from "./text-area.styles";
 import { ArrowUp, ToolTip } from "..";
 import { useTextArea } from "./useTextArea";
 import { TextAreaI } from "./text-area.types";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStopCircle } from "@fortawesome/free-solid-svg-icons";
 
 const TextArea = ({ "data-testid": datatestid }: TextAreaI) => {
   const {
@@ -11,6 +13,7 @@ const TextArea = ({ "data-testid": datatestid }: TextAreaI) => {
     valid,
     value,
     isLoading,
+    typing,
   } = useTextArea();
   return (
     <>
@@ -32,15 +35,19 @@ const TextArea = ({ "data-testid": datatestid }: TextAreaI) => {
           placeholder="Message me 😶‍🌫️..."
           onChange={onChangeHandler}
         />
-        <ToolTip off={10} tooltip="Send Message">
-          <ArrowUp
-            onClick={!isLoading ? onSumbitHandler : () => null}
-            theme="white"
-            css={{ height: 20, width: 20 }}
-            isValid={valid && !isLoading}
-            data-testid={datatestid}
-          />
-        </ToolTip>
+        {typing ? (
+          <FontAwesomeIcon icon={faStopCircle} />
+        ) : (
+          <ToolTip off={10} tooltip="Send Message">
+            <ArrowUp
+              onClick={!isLoading ? onSumbitHandler : () => null}
+              theme="white"
+              css={{ height: 20, width: 20 }}
+              isValid={valid && !isLoading}
+              data-testid={datatestid}
+            />
+          </ToolTip>
+        )}
       </StyledTextArea>
       <StyledWarning>
         MeowGPT can make mistakes. Consider checking important information.

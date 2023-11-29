@@ -3,13 +3,13 @@ import { UseTypewriterProps } from "./typewriter.types";
 import { useAppContext } from "../../context";
 
 const useTypewriter = ({ message, typingSpeed = 100 }: UseTypewriterProps) => {
+  const { typing } = useAppContext();
   const [text, setText] = useState("");
-  const [isTyping, setIsTyping] = useState(true);
 
   useEffect(() => {
     let timeoutId: NodeJS.Timeout;
 
-    if (isTyping && text.length < message.length) {
+    if (typing && text.length < message.length) {
       timeoutId = setTimeout(() => {
         setText(message.substring(0, text.length + 1));
       }, typingSpeed);
@@ -18,9 +18,9 @@ const useTypewriter = ({ message, typingSpeed = 100 }: UseTypewriterProps) => {
     return () => {
       clearTimeout(timeoutId);
     };
-  }, [text, isTyping, message, typingSpeed]);
+  }, [text, typing, message, typingSpeed]);
 
-  return { text, isTyping, setIsTyping };
+  return { text, typing };
 };
 
 export default useTypewriter;
