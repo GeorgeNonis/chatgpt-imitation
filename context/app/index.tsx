@@ -25,7 +25,11 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
 
   const isLoading = loading || typing;
 
-  const { sendQuestionHandler } = useService({ setConversation, setLoading });
+  const { sendQuestionHandler } = useService({
+    setConversation,
+    setLoading,
+    setCurrentMessageID,
+  });
 
   const stopTypingHandler = ({ text }: StopTypingI) => {
     setConversation((prevState) => {
