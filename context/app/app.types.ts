@@ -5,6 +5,7 @@ export interface ConvI {
   from: User;
   message: string;
   id: string;
+  isPrinted: boolean;
 }
 export interface ConversationI {
   id: string;
