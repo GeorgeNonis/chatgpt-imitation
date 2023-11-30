@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { UseTypewriterProps } from "./typewriter.types";
 import { useAppContext } from "../../context";
 
-const useTypewriter = ({ message, typingSpeed = 100 }: UseTypewriterProps) => {
+const useTypewriter = ({ message, typingSpeed = 50 }: UseTypewriterProps) => {
   const {
     typing,
     printedText: text,
@@ -29,8 +29,8 @@ const useTypewriter = ({ message, typingSpeed = 100 }: UseTypewriterProps) => {
         });
         return { ...prevState, messages: [...updatedState] };
       });
+      setTyping(false);
     }
-
     return () => {
       clearTimeout(timeoutId);
     };
