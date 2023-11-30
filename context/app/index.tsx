@@ -30,7 +30,7 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
     setConversation((prevState) => {
       const updatedState = prevState.messages.map((conv) => {
         if (conv.id === currentMessageID) {
-          return { ...conv, message: printedText };
+          return { ...conv, message: printedText, isPrinted: true };
         }
         return conv;
       });
@@ -47,6 +47,7 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
         typing,
         isLoading,
         printedText,
+        currentMessageID,
         setPrintedText,
         setConversation,
         setLoading,

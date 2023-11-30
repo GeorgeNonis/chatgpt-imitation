@@ -5,9 +5,11 @@ import { useAppContext } from "../../context";
 const useTypewriter = ({ message, typingSpeed = 100 }: UseTypewriterProps) => {
   const {
     typing,
-    setPrintedText: setText,
     printedText: text,
+    currentMessageID,
+    setPrintedText: setText,
     setTyping,
+    setConversation,
   } = useAppContext();
   console.log({ typing });
   useEffect(() => {
@@ -17,12 +19,31 @@ const useTypewriter = ({ message, typingSpeed = 100 }: UseTypewriterProps) => {
       timeoutId = setTimeout(() => {
         setText(message.substring(0, text.length + 1));
       }, typingSpeed);
+    } else if (text.length === message.length) {
+      setConversation((prevState) => {
+        const updatedState = prevState.messages.map((msg) => {
+          if (msg.id === currentMessageID) {
+            return { ...msg, isPrinted: true };
+          }
+          return msg;
+        });
+        return { ...prevState, messages: [...updatedState] };
+      });
     }
 
     return () => {
       clearTimeout(timeoutId);
     };
-  }, [text, typing, message, typingSpeed, setText, setTyping]);
+  }, [
+    text,
+    typing,
+    message,
+    typingSpeed,
+    setText,
+    setTyping,
+    setConversation,
+    currentMessageID,
+  ]);
 
   return { text, typing };
 };

@@ -22,6 +22,7 @@ export interface AppContextI {
   isLoading: boolean;
   printedText: string;
   conversation: ConversationI;
+  currentMessageID: string;
   setPrintedText: Dispatch<SetStateAction<string>>;
   setConversation: Dispatch<SetStateAction<ConversationI>>;
   setLoading: Dispatch<SetStateAction<boolean>>;
