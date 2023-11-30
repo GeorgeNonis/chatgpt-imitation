@@ -1,11 +1,15 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { UseTypewriterProps } from "./typewriter.types";
 import { useAppContext } from "../../context";
 
 const useTypewriter = ({ message, typingSpeed = 100 }: UseTypewriterProps) => {
-  const { typing } = useAppContext();
-  const [text, setText] = useState("");
-
+  const {
+    typing,
+    setPrintedText: setText,
+    printedText: text,
+    setTyping,
+  } = useAppContext();
+  console.log({ typing });
   useEffect(() => {
     let timeoutId: NodeJS.Timeout;
 
@@ -18,7 +22,7 @@ const useTypewriter = ({ message, typingSpeed = 100 }: UseTypewriterProps) => {
     return () => {
       clearTimeout(timeoutId);
     };
-  }, [text, typing, message, typingSpeed]);
+  }, [text, typing, message, typingSpeed, setText, setTyping]);
 
   return { text, typing };
 };

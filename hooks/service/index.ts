@@ -9,6 +9,7 @@ export const useService = ({
   setConversation,
   setLoading,
   setCurrentMessageID,
+  setTyping,
 }: UseServiceI) => {
   const sendQuestionHandler = async ({ value }: { value: string }) => {
     // Dummy id will be used later to detect it and replace it with actuall data
@@ -59,6 +60,7 @@ export const useService = ({
       });
 
       setCurrentMessageID(loadingDummyId);
+      setTyping(true);
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
         const statusCode = error.response.status;

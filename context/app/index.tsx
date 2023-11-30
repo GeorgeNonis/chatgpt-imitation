@@ -1,7 +1,7 @@
 "use client";
 
 import { ReactNode, createContext, useContext, useState } from "react";
-import { AppContextI, ConversationI, StopTypingI } from "./app.types";
+import { AppContextI, ConversationI } from "./app.types";
 import { useService } from "../../hooks";
 
 export const AppContext = createContext<AppContextI | null>(null);
@@ -11,6 +11,7 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
   const [typing, setTyping] = useState(false);
   const [currentMessageID, setCurrentMessageID] =
     useState<ConversationI["id"]>("");
+  const [printedText, setPrintedText] = useState<string>("");
   const [conversation, setConversation] = useState<ConversationI>({
     id: "1995",
     messages: [],
@@ -22,13 +23,14 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
     setConversation,
     setLoading,
     setCurrentMessageID,
+    setTyping,
   });
 
-  const stopTypingHandler = ({ text }: StopTypingI) => {
+  const stopTypingHandler = () => {
     setConversation((prevState) => {
       const updatedState = prevState.messages.map((conv) => {
         if (conv.id === currentMessageID) {
-          return { ...conv, message: text };
+          return { ...conv, message: printedText };
         }
         return conv;
       });
@@ -44,6 +46,8 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
         loading,
         typing,
         isLoading,
+        printedText,
+        setPrintedText,
         setConversation,
         setLoading,
         setTyping,

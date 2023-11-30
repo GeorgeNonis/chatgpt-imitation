@@ -9,6 +9,7 @@ const TextArea = ({ "data-testid": datatestid }: TextAreaI) => {
   const {
     onSumbitHandler,
     onChangeHandler,
+    stopTypingHandler,
     setValue,
     valid,
     value,
@@ -36,7 +37,7 @@ const TextArea = ({ "data-testid": datatestid }: TextAreaI) => {
           onChange={onChangeHandler}
         />
         {typing ? (
-          <FontAwesomeIcon icon={faStopCircle} />
+          <FontAwesomeIcon icon={faStopCircle} onClick={stopTypingHandler} />
         ) : (
           <ToolTip off={10} tooltip="Send Message">
             <ArrowUp
