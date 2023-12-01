@@ -1,6 +1,5 @@
 import { Message } from "..";
 import { StyledConversation } from "./conversation.styles";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowCircleDown } from "@fortawesome/free-solid-svg-icons";
 import { useConversation } from "./useConversation";
 import { ConversationIn } from "./conversation.types";
