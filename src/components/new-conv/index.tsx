@@ -11,6 +11,8 @@ const NewConversation = () => {
       <Icon
         icon={faPenToSquare}
         style={{
+          width: 20,
+          height: 20,
           justifySelf: "flex-end",
         }}
         data-testid="faPenToSquare"

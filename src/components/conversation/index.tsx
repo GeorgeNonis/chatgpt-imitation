@@ -1,6 +1,5 @@
 import { Message } from "..";
 import { StyledConversation } from "./conversation.styles";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowCircleDown } from "@fortawesome/free-solid-svg-icons";
 import { useConversation } from "./useConversation";
 import { ConversationIn } from "./conversation.types";
@@ -15,6 +14,7 @@ const Conversation = ({ conversation, typing }: ConversationIn) => {
     const latestMsg = conversation.messages[lastIndex].message === inf.message;
     return <Message {...inf} key={i} canCopy={latestMsg && typing} />;
   });
+
   return (
     <StyledConversation ref={containerRef}>
       {conv}

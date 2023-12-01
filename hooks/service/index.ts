@@ -49,6 +49,8 @@ export const useService = ({
       const message = await sendQuestion({ value });
 
       // Replace the dummy state with the actuall message from the response
+      setTyping(true);
+      setCurrentMessageID(loadingDummyId);
       setConversation((prevState) => {
         const replaceDummy = prevState.messages.map((c) => {
           if (c.id === loadingDummyId) {
@@ -58,9 +60,6 @@ export const useService = ({
         });
         return { ...prevState, messages: [...replaceDummy] };
       });
-
-      setCurrentMessageID(loadingDummyId);
-      setTyping(true);
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
         const statusCode = error.response.status;
