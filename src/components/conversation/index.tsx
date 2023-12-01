@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowCircleDown } from "@fortawesome/free-solid-svg-icons";
 import { useConversation } from "./useConversation";
 import { ConversationIn } from "./conversation.types";
+import Icon from "../ui/icon";
 
 const Conversation = ({ conversation, typing }: ConversationIn) => {
   const { showScrollDownArrow, containerRef, scrollToBottom } =
@@ -17,7 +18,7 @@ const Conversation = ({ conversation, typing }: ConversationIn) => {
   return (
     <StyledConversation ref={containerRef}>
       {conv}
-      <FontAwesomeIcon
+      <Icon
         icon={faArrowCircleDown}
         data-testid="faArrowCircleDown"
         style={{
