@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowCircleDown } from "@fortawesome/free-solid-svg-icons";
 import { useConversation } from "./useConversation";
 import { ConversationIn } from "./conversation.types";
+import Icon from "../ui/icon";
 
 const Conversation = ({ conversation, typing }: ConversationIn) => {
   const { showScrollDownArrow, containerRef, scrollToBottom } =
@@ -17,14 +18,12 @@ const Conversation = ({ conversation, typing }: ConversationIn) => {
   return (
     <StyledConversation ref={containerRef}>
       {conv}
-      <FontAwesomeIcon
+      <Icon
         icon={faArrowCircleDown}
         data-testid="faArrowCircleDown"
         style={{
           position: "sticky",
           cursor: "pointer",
-          width: "30px",
-          height: "30px",
           bottom: 24,
           left: "50%",
           transform: "translateX(-50%)",
@@ -33,7 +32,6 @@ const Conversation = ({ conversation, typing }: ConversationIn) => {
           borderRadius: "50%",
           opacity: showScrollDownArrow ? 0.8 : 0,
         }}
-        fill="red"
         onClick={scrollToBottom}
       />
     </StyledConversation>
