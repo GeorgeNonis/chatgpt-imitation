@@ -15,7 +15,6 @@ const NewConversation = () => {
         style={{
           justifySelf: "flex-end",
         }}
-        stroke="red"
         data-testid="faPenToSquare"
       />
     </StyledNewConversation>
