@@ -2,8 +2,8 @@ import { StyledInput, StyledTextArea, StyledWarning } from "./text-area.styles";
 import { ArrowUp, ToolTip } from "..";
 import { useTextArea } from "./useTextArea";
 import { TextAreaI } from "./text-area.types";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStopCircle } from "@fortawesome/free-solid-svg-icons";
+import Icon from "../ui/icon";
 
 const TextArea = ({ "data-testid": datatestid }: TextAreaI) => {
   const {
@@ -16,6 +16,7 @@ const TextArea = ({ "data-testid": datatestid }: TextAreaI) => {
     isLoading,
     typing,
   } = useTextArea();
+  const iconStyle = { height: 20, width: 20, padding: 4 };
   return (
     <>
       <StyledTextArea>
@@ -37,13 +38,24 @@ const TextArea = ({ "data-testid": datatestid }: TextAreaI) => {
           onChange={onChangeHandler}
         />
         {typing ? (
-          <FontAwesomeIcon icon={faStopCircle} onClick={stopTypingHandler} />
+          <ToolTip tooltip="Stop" off={10}>
+            <Icon
+              icon={faStopCircle}
+              onClick={stopTypingHandler}
+              style={{
+                display: "grid",
+                placeSelf: "center",
+                cursor: "pointer",
+                color: "black",
+              }}
+            />
+          </ToolTip>
         ) : (
           <ToolTip off={10} tooltip="Send Message">
             <ArrowUp
               onClick={!isLoading ? onSumbitHandler : () => null}
               theme="white"
-              css={{ height: 20, width: 20 }}
+              css={iconStyle}
               isValid={valid && !isLoading}
               data-testid={datatestid}
             />
