@@ -17,7 +17,6 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
     messages: [],
   });
 
-  console.log({ conversation });
   const isLoading = loading || typing;
 
   const { sendQuestionHandler } = useService({

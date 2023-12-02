@@ -2,7 +2,7 @@ import { styled } from "@stitches/react";
 
 export const StyledHeader = styled("h2", {
   position: "absolute",
-  top: 8,
+  top: 10,
   left: 8,
   color: "white",
   display: "grid",
