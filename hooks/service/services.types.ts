@@ -1,9 +1,9 @@
-import { AppContextI, ConversationI } from "../../context/app/app.types";
-import { Dispatch, SetStateAction } from "react";
+import { AppContextI } from "../../context/app/app.types";
 
 export interface UseServiceI {
-  setConversation: Dispatch<SetStateAction<ConversationI>>;
-  setLoading: Dispatch<SetStateAction<boolean>>;
-  setTyping: Dispatch<SetStateAction<boolean>>;
+  setConversation: AppContextI["setConversation"];
+  setLoading: AppContextI["setLoading"];
+  setTyping: AppContextI["setTyping"];
   setCurrentMessageID: AppContextI["setCurrentMessageID"];
+  isLoading: boolean;
 }

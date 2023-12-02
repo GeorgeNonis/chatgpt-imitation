@@ -24,6 +24,7 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
     setLoading,
     setCurrentMessageID,
     setTyping,
+    isLoading,
   });
 
   const stopTypingHandler = () => {

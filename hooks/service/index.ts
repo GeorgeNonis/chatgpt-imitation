@@ -10,8 +10,12 @@ export const useService = ({
   setLoading,
   setCurrentMessageID,
   setTyping,
+  isLoading,
 }: UseServiceI) => {
   const sendQuestionHandler = async ({ value }: { value: string }) => {
+    // GUARDS
+    if (value.trim().length === 0 || isLoading) return;
+
     // Dummy id will be used later to detect it and replace it with actuall data
     const loadingDummyId = uuidv4();
 
