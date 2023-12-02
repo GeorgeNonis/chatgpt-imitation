@@ -1,7 +1,8 @@
-import { Attributes, PropsWithoutRef, RefAttributes } from "react";
+import { ComponentProps } from "react";
+import { StyledIdeaContainer } from "./idea.styles";
 
 export type IdeaI = {
   title: string;
   idea: string;
   ["data-testid"]?: string;
-} & React.HtmlHTMLAttributes<HTMLDivElement>;
+} & ComponentProps<typeof StyledIdeaContainer>;
