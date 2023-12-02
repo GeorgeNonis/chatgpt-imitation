@@ -5,11 +5,16 @@ import { useAppContext } from "../../context";
 const useTypewriter = ({
   message,
   isPrinted,
-  typingSpeed = 50,
+  typingSpeed = 40,
 }: UseTypewriterProps) => {
   const [text, setText] = useState("");
-  const { typing, currentMessageID, setTyping, setConversation } =
-    useAppContext();
+  const {
+    typing,
+    currentMessageID,
+    setTyping,
+    setConversation,
+    setPrintedText,
+  } = useAppContext();
 
   useEffect(() => {
     let timeoutId: NodeJS.Timeout;
@@ -17,6 +22,7 @@ const useTypewriter = ({
       timeoutId = setTimeout(() => {
         setText(message.substring(0, text.length + 1));
       }, typingSpeed);
+      setPrintedText(text);
     } else if (text.length === message.length && typing && !isPrinted) {
       setConversation((prevState) => {
         const updatedState = prevState.messages.map((msg) => {
@@ -43,6 +49,7 @@ const useTypewriter = ({
     setConversation,
     currentMessageID,
     isPrinted,
+    setPrintedText,
   ]);
 
   return { text, typing };
