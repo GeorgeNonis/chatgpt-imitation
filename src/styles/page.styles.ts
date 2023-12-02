@@ -7,6 +7,7 @@ export const StyledMain = styled("main", {
 });
 
 export const StyledSideBar = styled("div", {
+  position: "relative",
   display: "grid",
   gridTemplateRows: ".5fr 11.5fr",
   backgroundColor: "rgba(0,0,0,1)",

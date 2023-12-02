@@ -1,6 +1,8 @@
 import { styled } from "@stitches/react";
 
 export const StyledNewConversation = styled("div", {
+  position: "absolute",
+  top: 10,
   display: "grid",
   gridTemplateColumns: "3fr 3fr 6fr",
   gap: 5,

@@ -14,7 +14,7 @@ import { Copy, MeowGPT, UserMessage } from "./comps";
 
 const Message = ({ canCopy, ...props }: ChatI) => {
   const { message, from } = props;
-  const { copyToClipboard, loading } = useChat({ message });
+  const { copyToClipboard } = useChat({ message });
   const onGoingRequest = message === "Loading";
   const meowGPT = from === "MeowGPT";
 

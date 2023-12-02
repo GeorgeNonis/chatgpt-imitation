@@ -2,16 +2,21 @@ import { StyledInput, StyledTextArea, StyledWarning } from "./text-area.styles";
 import { ArrowUp, ToolTip } from "..";
 import { useTextArea } from "./useTextArea";
 import { TextAreaI } from "./text-area.types";
+import { faStopCircle } from "@fortawesome/free-solid-svg-icons";
+import Icon from "../ui/icon";
 
 const TextArea = ({ "data-testid": datatestid }: TextAreaI) => {
   const {
     onSumbitHandler,
     onChangeHandler,
+    stopTypingHandler,
     setValue,
     valid,
     value,
     isLoading,
+    typing,
   } = useTextArea();
+  const iconStyle = { height: 20, width: 20, padding: 4 };
   return (
     <>
       <StyledTextArea>
@@ -32,15 +37,30 @@ const TextArea = ({ "data-testid": datatestid }: TextAreaI) => {
           placeholder="Message me 😶‍🌫️..."
           onChange={onChangeHandler}
         />
-        <ToolTip off={10} tooltip="Send Message">
-          <ArrowUp
-            onClick={!isLoading ? onSumbitHandler : () => null}
-            theme="white"
-            css={{ height: 20, width: 20 }}
-            isValid={valid && !isLoading}
-            data-testid={datatestid}
-          />
-        </ToolTip>
+        {typing ? (
+          <ToolTip tooltip="Stop" off={10}>
+            <Icon
+              icon={faStopCircle}
+              onClick={stopTypingHandler}
+              style={{
+                display: "grid",
+                placeSelf: "center",
+                cursor: "pointer",
+                color: "black",
+              }}
+            />
+          </ToolTip>
+        ) : (
+          <ToolTip off={10} tooltip="Send Message">
+            <ArrowUp
+              onClick={!isLoading ? onSumbitHandler : () => null}
+              theme="white"
+              css={iconStyle}
+              isValid={valid && !isLoading}
+              data-testid={datatestid}
+            />
+          </ToolTip>
+        )}
       </StyledTextArea>
       <StyledWarning>
         MeowGPT can make mistakes. Consider checking important information.

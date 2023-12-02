@@ -5,7 +5,12 @@ import toast from "react-hot-toast";
 import { UseServiceI } from "./services.types";
 import { errorStatuses } from "../../config";
 
-export const useService = ({ setConversation, setLoading }: UseServiceI) => {
+export const useService = ({
+  setConversation,
+  setLoading,
+  setCurrentMessageID,
+  setTyping,
+}: UseServiceI) => {
   const sendQuestionHandler = async ({ value }: { value: string }) => {
     // Dummy id will be used later to detect it and replace it with actuall data
     const loadingDummyId = uuidv4();
@@ -44,6 +49,8 @@ export const useService = ({ setConversation, setLoading }: UseServiceI) => {
       const message = await sendQuestion({ value });
 
       // Replace the dummy state with the actuall message from the response
+      setTyping(true);
+      setCurrentMessageID(loadingDummyId);
       setConversation((prevState) => {
         const replaceDummy = prevState.messages.map((c) => {
           if (c.id === loadingDummyId) {

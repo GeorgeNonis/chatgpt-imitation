@@ -2,7 +2,8 @@ import { ChangeEvent, useEffect, useState } from "react";
 import { useAppContext } from "../../../context";
 
 export const useTextArea = () => {
-  const { sendQuestionHandler, isLoading } = useAppContext();
+  const { sendQuestionHandler, stopTypingHandler, isLoading, typing } =
+    useAppContext();
   const [value, setValue] = useState("");
   const [valid, setValid] = useState(false);
 
@@ -27,8 +28,10 @@ export const useTextArea = () => {
     onChangeHandler,
     onSumbitHandler,
     setValue,
+    stopTypingHandler,
     valid,
     value,
     isLoading,
+    typing,
   };
 };
