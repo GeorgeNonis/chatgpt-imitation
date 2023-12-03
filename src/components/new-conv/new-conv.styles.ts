@@ -8,7 +8,7 @@ export const StyledNewConversation = styled("div", {
   gap: 5,
   color: "white",
   placeItems: "center",
-  padding: 5,
+  padding: "5px 10px",
   borderRadius: 10,
   transition: "all .1s ease-in-out",
 

@@ -1,12 +1,13 @@
-import { STORE_CONVS } from "../../../config";
+import { useAppContext } from "../../../context";
 import StoredConversation from "./comps/conv";
 import { StyledStoredConversation } from "./stored-conv.styles";
 
 const StoredConversations = () => {
+  const { chatLog } = useAppContext();
   return (
     <StyledStoredConversation>
-      {STORE_CONVS.map((conv, i) => {
-        return <StoredConversation key={i}>{conv}</StoredConversation>;
+      {chatLog.map((conv, i) => {
+        return <StoredConversation key={i}>{conv.id}</StoredConversation>;
       })}
     </StyledStoredConversation>
   );
