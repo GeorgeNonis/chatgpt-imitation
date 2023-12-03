@@ -1,11 +1,13 @@
 import { StyledStoredConv } from "./conv.styles";
 import { StoredConversationI } from "./conv.types";
 
-const StoredConversation = ({ children, ...props }: StoredConversationI) => {
-  const random = Math.random() < 0.5;
-
+const StoredConversation = ({
+  children,
+  selected,
+  ...props
+}: StoredConversationI) => {
   return (
-    <StyledStoredConv selected={random} {...props}>
+    <StyledStoredConv selected={selected} {...props}>
       {children}
     </StyledStoredConv>
   );

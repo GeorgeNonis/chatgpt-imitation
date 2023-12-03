@@ -4,4 +4,5 @@ import { StyledStoredConv } from "./conv.styles";
 export interface StoredConversationI
   extends ComponentProps<typeof StyledStoredConv> {
   children: ReactNode;
+  selected: boolean;
 }

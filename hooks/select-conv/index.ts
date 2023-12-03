@@ -1,20 +1,18 @@
 import { useAppContext } from "../../context";
 
 export const useSelectConv = () => {
-  const { conversation, isLoading, chatLog, setConversation } = useAppContext();
-
-  const id = conversation.id;
-
-  const guard = isLoading && id === undefined;
+  const { isLoading, chatLog, setConversation } = useAppContext();
 
   const selectConversationHandler = (id: string) => {
-    console.log({ guard });
-    if (guard) return;
+    // Guard
+    if (isLoading || !id) return;
+
     const findChat = chatLog.find((c) => c.id === id);
 
-    if (findChat?.messages.length === 0) return;
-
-    console.log({ findChat, id });
+    // Proceeds only if its valid conversation - Just a guard in case there has been a wrong input in the DB
+    if (findChat && findChat.messages.length > 0) {
+      setConversation({ ...findChat });
+    }
   };
 
   return {
