@@ -11,6 +11,7 @@ export const useSelectConv = () => {
 
     // Proceeds only if its valid conversation - Just a guard in case there has been a wrong input in the DB
     if (findChat && findChat.messages.length > 0) {
+      console.log({ findChat });
       setConversation({ ...findChat });
     }
   };

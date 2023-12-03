@@ -23,7 +23,7 @@ const TextArea = ({ "data-testid": datatestid }: TextAreaI) => {
         <StyledInput
           data-testid="text-area"
           value={value}
-          onKeyDown={(e: KeyboardEvent) => {
+          onKeyDown={(e: React.KeyboardEvent) => {
             if (isLoading) return;
             if (e.key === "Enter" && !e.shiftKey) {
               e.preventDefault();
