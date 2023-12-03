@@ -12,6 +12,7 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
   const [currentMessageID, setCurrentMessageID] =
     useState<ConversationI["id"]>("");
   const [printedText, setPrintedText] = useState<string>("");
+  const [chatLog, setChatLog] = useState<ConversationI[]>([]);
   const [conversation, setConversation] = useState<ConversationI>({
     id: "1995",
     messages: [],
@@ -49,6 +50,7 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
         isLoading,
         printedText,
         currentMessageID,
+        chatLog,
         setPrintedText,
         setConversation,
         setLoading,
@@ -56,6 +58,7 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
         setCurrentMessageID,
         stopTypingHandler,
         sendQuestionHandler,
+        setChatLog,
       }}
     >
       {children}

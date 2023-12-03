@@ -24,7 +24,7 @@ const Home = () => {
     <StyledMain>
       <StyledSideBar>
         <NewConversation />
-        {/* <StoredConversations /> */}
+        <StoredConversations />
       </StyledSideBar>
       <StyledChatGptchat emptyChat={!isThereConv}>
         <Header />

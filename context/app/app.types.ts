@@ -23,6 +23,7 @@ export interface AppContextI {
   printedText: string;
   conversation: ConversationI;
   currentMessageID: string;
+  chatLog: ConversationI[];
   setPrintedText: Dispatch<SetStateAction<string>>;
   setConversation: Dispatch<SetStateAction<ConversationI>>;
   setLoading: Dispatch<SetStateAction<boolean>>;
@@ -30,4 +31,5 @@ export interface AppContextI {
   sendQuestionHandler: ({ value }: { value: string }) => Promise<void>;
   stopTypingHandler: () => void;
   setCurrentMessageID: Dispatch<SetStateAction<string>>;
+  setChatLog: Dispatch<SetStateAction<ConversationI[]>>;
 }
