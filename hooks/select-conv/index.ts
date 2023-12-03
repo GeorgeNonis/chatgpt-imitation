@@ -1,7 +1,7 @@
 import { useAppContext } from "../../context";
 
 export const useSelectConv = () => {
-  const { conversation, isLoading } = useAppContext();
+  const { conversation, isLoading, chatLog, setConversation } = useAppContext();
 
   const id = conversation.id;
 
@@ -10,6 +10,9 @@ export const useSelectConv = () => {
 
   const selectConversationHandler = () => {
     if (guard) return;
+    const findChat = chatLog.find((c) => c.id === id);
+
+    console.log({ findChat });
   };
 
   return {
