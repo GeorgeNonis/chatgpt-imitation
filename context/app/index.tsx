@@ -12,7 +12,9 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
   const [currentMessageID, setCurrentMessageID] =
     useState<ConversationI["id"]>("");
   const [printedText, setPrintedText] = useState<string>("");
-  const [chatLog, setChatLog] = useState<ConversationI[]>([]);
+  const [chatLog, setChatLog] = useState<ConversationI[]>([
+    { id: "6969", messages: [] },
+  ]);
   const [conversation, setConversation] = useState<ConversationI>({
     id: "1995",
     messages: [],
