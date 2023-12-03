@@ -1,10 +1,18 @@
-export const useSelectConv = () => {
-  const values = {};
+import { useAppContext } from "../../context";
 
-  const handlers = {};
+export const useSelectConv = () => {
+  const { conversation, isLoading } = useAppContext();
+
+  const id = conversation.id;
+
+  const guard =
+    isLoading && conversation.messages.length === 0 && id === undefined;
+
+  const selectConversationHandler = () => {
+    if (guard) return;
+  };
 
   return {
-    values,
-    handlers,
+    selectConversationHandler,
   };
 };
