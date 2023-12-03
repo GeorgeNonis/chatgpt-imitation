@@ -18,7 +18,8 @@ const useTypewriter = ({
 
   useEffect(() => {
     let timeoutId: NodeJS.Timeout;
-    if (typing && text.length < message.length) {
+
+    if (typing && text.length < message.length && !isPrinted) {
       timeoutId = setTimeout(() => {
         setText(message.substring(0, text.length + 1));
       }, typingSpeed);
@@ -34,6 +35,8 @@ const useTypewriter = ({
         return { ...prevState, messages: [...updatedState] };
       });
       setTyping(false);
+    } else {
+      setText(message);
     }
 
     return () => {

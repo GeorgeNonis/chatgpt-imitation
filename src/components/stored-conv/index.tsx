@@ -1,13 +1,24 @@
 import { useAppContext } from "../../../context";
+import { useSelectConv } from "../../../hooks";
 import StoredConversation from "./comps/conv";
 import { StyledStoredConversation } from "./stored-conv.styles";
 
 const StoredConversations = () => {
-  const { chatLog } = useAppContext();
+  const { chatLog, conversation } = useAppContext();
+  const { selectConversationHandler } = useSelectConv();
   return (
     <StyledStoredConversation>
       {chatLog.map((conv, i) => {
-        return <StoredConversation key={i}>{conv.id}</StoredConversation>;
+        const selected = conv.id === conversation.id;
+        return (
+          <StoredConversation
+            selected={selected}
+            key={i}
+            onClick={() => selectConversationHandler(conv.id)}
+          >
+            {conv.id}
+          </StoredConversation>
+        );
       })}
     </StyledStoredConversation>
   );
