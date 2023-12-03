@@ -5,14 +5,16 @@ export const useSelectConv = () => {
 
   const id = conversation.id;
 
-  const guard =
-    isLoading && conversation.messages.length === 0 && id === undefined;
+  const guard = isLoading && id === undefined;
 
-  const selectConversationHandler = () => {
+  const selectConversationHandler = (id: string) => {
+    console.log({ guard });
     if (guard) return;
     const findChat = chatLog.find((c) => c.id === id);
 
-    console.log({ findChat });
+    if (findChat?.messages.length === 0) return;
+
+    console.log({ findChat, id });
   };
 
   return {
