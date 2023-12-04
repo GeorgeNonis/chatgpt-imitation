@@ -23,10 +23,7 @@ export const useService = ({
       const conv = prevState.messages;
       return {
         ...prevState,
-        messages: [
-          ...conv,
-          { from: "You", message: value, id: uuidv4(), isPrinted: false },
-        ],
+        messages: [...conv, { from: "You", message: value, id: uuidv4() }],
       };
     });
 
