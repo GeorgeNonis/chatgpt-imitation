@@ -5,7 +5,7 @@ import { TextAreaI } from "./text-area.types";
 import { faStopCircle } from "@fortawesome/free-solid-svg-icons";
 import Icon from "../ui/icon";
 
-const TextArea = ({ "data-testid": datatestid }: TextAreaI) => {
+const TextArea = ({ "data-testid": datatestid, ...props }: TextAreaI) => {
   const {
     onSumbitHandler,
     onChangeHandler,
@@ -19,7 +19,7 @@ const TextArea = ({ "data-testid": datatestid }: TextAreaI) => {
   const iconStyle = { height: 20, width: 20, padding: 4 };
   return (
     <>
-      <StyledTextArea>
+      <StyledTextArea {...props}>
         <StyledInput
           data-testid="text-area"
           value={value}

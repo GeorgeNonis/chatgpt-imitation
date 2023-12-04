@@ -1,12 +1,17 @@
-import { User } from "@/components/message/message.types";
-import { Dispatch, MutableRefObject, SetStateAction } from "react";
+import { Dispatch, SetStateAction } from "react";
 
-export interface ConvI {
-  from: User;
-  message: string;
-  id: string;
+export interface YouI {
+  from: "You";
+}
+export interface MeowGPTType {
+  from: "MeowGPT";
   isPrinted: boolean;
 }
+export type ConvI = {
+  message: string;
+  id: string;
+} & (YouI | MeowGPTType);
+
 export interface ConversationI {
   id: string;
   messages: ConvI[] | [];

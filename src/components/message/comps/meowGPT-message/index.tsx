@@ -2,8 +2,8 @@ import { useTypewriter } from "../../../../../hooks";
 import { StyledTypewriter } from "./meowGPT-message.styles";
 import { MeowGPTI } from "./meowGPT-message.types";
 
-const MeowGPT = ({ message, isPrinted }: MeowGPTI) => {
+const MeowGPT = ({ message, isPrinted, ...props }: MeowGPTI) => {
   const { text } = useTypewriter({ message, isPrinted });
-  return <StyledTypewriter>{text}</StyledTypewriter>;
+  return <StyledTypewriter {...props}>{text}</StyledTypewriter>;
 };
 export default MeowGPT;

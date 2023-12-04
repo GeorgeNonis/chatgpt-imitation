@@ -11,7 +11,7 @@ import {
 import { useState } from "react";
 import { ToolTipProps } from "./tool-tip.types";
 
-const ToolTip = ({ children, tooltip, css, off = 0 }: ToolTipProps) => {
+const ToolTip = ({ children, tooltip, off = 0, ...props }: ToolTipProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const { refs, floatingStyles, context } = useFloating({
@@ -29,7 +29,7 @@ const ToolTip = ({ children, tooltip, css, off = 0 }: ToolTipProps) => {
       <StyledReference
         ref={refs.setReference}
         {...getReferenceProps()}
-        css={{ ...css }}
+        {...props}
       >
         {children}
       </StyledReference>
