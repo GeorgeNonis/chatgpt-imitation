@@ -3,6 +3,7 @@
 import { ReactNode, createContext, useContext, useState } from "react";
 import { AppContextI, ConversationI } from "./app.types";
 import { useService } from "../../hooks";
+import { v4 as uuid } from "uuid";
 
 export const AppContext = createContext<AppContextI | null>(null);
 
@@ -14,7 +15,7 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
   const [printedText, setPrintedText] = useState<string>("");
   const [chatLog, setChatLog] = useState<ConversationI[]>([]);
   const [conversation, setConversation] = useState<ConversationI>({
-    id: "1995",
+    id: uuid(),
     messages: [],
   });
 
