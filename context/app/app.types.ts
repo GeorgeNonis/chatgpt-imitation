@@ -1,5 +1,5 @@
 import { User } from "@/components/message/message.types";
-import { Dispatch, MutableRefObject, SetStateAction } from "react";
+import { Dispatch, SetStateAction } from "react";
 
 export interface ConvI {
   from: User;
