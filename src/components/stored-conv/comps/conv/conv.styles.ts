@@ -28,10 +28,11 @@ export const StyledStoredConv = styled("div", {
 });
 
 export const StyledCover = styled("div", {
-  transition: "all .1s ease-in-out",
-  "&:hover": {
-    backgroundColor: "rgb(128 128 128 / 19%)",
-  },
+  position: "absolute",
+  top: 0,
+  bottom: 0,
+  right: 0,
+  left: 0,
 });
 
 export const StyledShadow = styled("div", {
