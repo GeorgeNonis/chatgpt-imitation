@@ -1,9 +1,16 @@
 "use client";
 
-import { ReactNode, createContext, useContext, useState } from "react";
+import {
+  ReactNode,
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { AppContextI, ConversationI } from "./app.types";
 import { useService } from "../../hooks";
 import { v4 as uuid } from "uuid";
+import { getHistory } from "../../services";
 
 export const AppContext = createContext<AppContextI | null>(null);
 
@@ -41,6 +48,15 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
     });
     setTyping(false);
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getHistory();
+      setChatLog(data);
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <AppContext.Provider
