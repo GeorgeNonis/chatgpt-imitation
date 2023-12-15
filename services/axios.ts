@@ -9,3 +9,7 @@ export const axiosInstance = axios.create({
     Authorization: `Bearer ${process.env.NEXT_PUBLIC_OPEN_API_KEY}`,
   },
 });
+
+export const axiosServerInstance = axios.create({
+  baseURL: "http://localhost:3000",
+});

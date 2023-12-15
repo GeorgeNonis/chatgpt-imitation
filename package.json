@@ -22,6 +22,7 @@
     "axios": "^1.6.2",
     "font-awesome": "^4.7.0",
     "next": "13.5.6",
+    "noniscomponents": "^1.0.7",
     "openai": "^4.20.0",
     "react": "^18",
     "react-dom": "^18",
