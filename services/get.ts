@@ -9,3 +9,13 @@ export const getHistory = async () => {
     return error;
   }
 };
+
+export const getConversation = async ({}: { id: string }) => {
+  try {
+    const response = await axiosServerInstance("");
+
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};
