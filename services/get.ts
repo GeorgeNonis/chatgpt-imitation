@@ -10,9 +10,9 @@ export const getHistory = async () => {
   }
 };
 
-export const getConversation = async ({}: { id: string }) => {
+export const getConversation = async ({ id }: { id: string }) => {
   try {
-    const response = await axiosServerInstance("");
+    const response = await axiosServerInstance(`conversations/${id}`);
 
     return response.data;
   } catch (error) {

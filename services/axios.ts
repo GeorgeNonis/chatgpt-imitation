@@ -11,5 +11,5 @@ export const axiosInstance = axios.create({
 });
 
 export const axiosServerInstance = axios.create({
-  baseURL: "http://localhost:3000",
+  baseURL: "http://localhost:3000/",
 });
