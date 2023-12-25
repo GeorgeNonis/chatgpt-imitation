@@ -4,6 +4,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { UseServiceI } from "./services.types";
 import { errorStatuses } from "../../config";
+import { updateConv } from "../../services/patch";
 
 export const useService = ({
   setConversation,
@@ -60,6 +61,15 @@ export const useService = ({
           return c;
         });
         return { ...prevState, messages: [...replaceDummy] };
+      });
+
+      // TESTING PURPOSES
+      await updateConv({
+        id: loadingDummyId,
+        messages: [
+          { from: "MeowGPT", id: "1", isPrinted: false, message: "HELLAS" },
+          { from: "You", id: "1", message: "GREAT ALEXANDER" },
+        ],
       });
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
